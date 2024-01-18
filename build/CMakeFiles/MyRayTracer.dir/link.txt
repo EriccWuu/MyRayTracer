@@ -1,0 +1,3 @@
+E:\Program\MSYS64\clang64\bin\cmake.exe -E rm -f CMakeFiles\MyRayTracer.dir/objects.a
+E:\Program\MSYS64\clang64\bin\llvm-ar.exe qc CMakeFiles\MyRayTracer.dir/objects.a @CMakeFiles\MyRayTracer.dir\objects1
+E:\Program\MSYS64\clang64\bin\clang++.exe -g -Wl,--whole-archive CMakeFiles\MyRayTracer.dir/objects.a -Wl,--no-whole-archive -o MyRayTracer.exe -Wl,--out-implib,libMyRayTracer.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\MyRayTracer.dir\linkLibs.rsp

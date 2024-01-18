@@ -1,0 +1,129 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "Clang",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"E:/Program/MSYS64/clang64/lib/clang/15.0.7/include",
+						"E:/Program/MSYS64/clang64/include"
+					],
+					"linkDirectories" : 
+					[
+						"E:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib",
+						"E:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib",
+						"E:/Program/MSYS64/clang64/lib",
+						"E:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib",
+						"E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"mingw32",
+						"unwind",
+						"moldname",
+						"mingwex",
+						"advapi32",
+						"shell32",
+						"user32",
+						"kernel32",
+						"mingw32",
+						"unwind",
+						"moldname",
+						"mingwex",
+						"kernel32"
+					]
+				},
+				"path" : "E:/Program/MSYS64/clang64/bin/clang.exe",
+				"version" : "15.0.7"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "Clang",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"E:/Program/MSYS64/clang64/include/c++/v1",
+						"E:/Program/MSYS64/clang64/lib/clang/15.0.7/include",
+						"E:/Program/MSYS64/clang64/include"
+					],
+					"linkDirectories" : 
+					[
+						"E:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib",
+						"E:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib",
+						"E:/Program/MSYS64/clang64/lib",
+						"E:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib",
+						"E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"c++",
+						"mingw32",
+						"unwind",
+						"moldname",
+						"mingwex",
+						"advapi32",
+						"shell32",
+						"user32",
+						"kernel32",
+						"mingw32",
+						"unwind",
+						"moldname",
+						"mingwex",
+						"kernel32"
+					]
+				},
+				"path" : "E:/Program/MSYS64/clang64/bin/clang++.exe",
+				"version" : "15.0.7"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "E:/Program/MSYS64/clang64/bin/windres.exe"
+			},
+			"language" : "RC",
+			"sourceFileExtensions" : 
+			[
+				"rc",
+				"RC"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
