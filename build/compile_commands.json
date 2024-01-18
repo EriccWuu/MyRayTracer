@@ -1,17 +1,17 @@
 [
 {
   "directory": "E:/Doc/ProjectFiles/CPP/MyRayTracer/build",
-  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -g -std=gnu++20 -o CMakeFiles\\MyRayTracer.dir\\src\\Camera.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\Camera.cpp",
-  "file": "E:/Doc/ProjectFiles/CPP/MyRayTracer/src/Camera.cpp"
+  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe -g -std=gnu++20 -o CMakeFiles\\MyRayTracer.dir\\src\\Camera.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\Camera.cpp",
+  "file": "E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\Camera.cpp"
 },
 {
   "directory": "E:/Doc/ProjectFiles/CPP/MyRayTracer/build",
-  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -g -std=gnu++20 -o CMakeFiles\\MyRayTracer.dir\\src\\TGAImage.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\TGAImage.cpp",
-  "file": "E:/Doc/ProjectFiles/CPP/MyRayTracer/src/TGAImage.cpp"
+  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe -g -std=gnu++20 -o CMakeFiles\\MyRayTracer.dir\\src\\TGAImage.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\TGAImage.cpp",
+  "file": "E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\TGAImage.cpp"
 },
 {
   "directory": "E:/Doc/ProjectFiles/CPP/MyRayTracer/build",
-  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -g -std=gnu++20 -o CMakeFiles\\MyRayTracer.dir\\src\\main.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\main.cpp",
-  "file": "E:/Doc/ProjectFiles/CPP/MyRayTracer/src/main.cpp"
+  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe -g -std=gnu++20 -o CMakeFiles\\MyRayTracer.dir\\src\\main.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\main.cpp",
+  "file": "E:\\Doc\\ProjectFiles\\CPP\\MyRayTracer\\src\\main.cpp"
 }
 ]

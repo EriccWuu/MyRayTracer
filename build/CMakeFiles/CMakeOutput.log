@@ -26,37 +26,29 @@ Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" p
 The CXX compiler identification is Clang, found in "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/3.25.2/CompilerIdCXX/a.exe"
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3
+Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-g2jcl5
 
-Run Build Command(s):E:/Program/MSYS64/clang64/bin/mingw32-make.exe -f Makefile cmTC_ee276/fast && E:/Program/MSYS64/clang64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_ee276.dir\build.make CMakeFiles/cmTC_ee276.dir/build
-mingw32-make[1]: Entering directory 'E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3'
-Building C object CMakeFiles/cmTC_ee276.dir/CMakeCCompilerABI.c.obj
-E:\Program\MSYS64\clang64\bin\clang.exe   -v -MD -MT CMakeFiles/cmTC_ee276.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\cmTC_ee276.dir\CMakeCCompilerABI.c.obj.d -o CMakeFiles\cmTC_ee276.dir\CMakeCCompilerABI.c.obj -c E:\Program\MSYS64\clang64\share\cmake\Modules\CMakeCCompilerABI.c
+Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe cmTC_e4e1e && [1/2] Building C object CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj
 clang version 15.0.7
 Target: x86_64-w64-windows-gnu
 Thread model: posix
 InstalledDir: E:/Program/MSYS64/clang64/bin
  (in-process)
- "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3 -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_ee276.dir\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_ee276.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3 -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o "CMakeFiles\\cmTC_ee276.dir\\CMakeCCompilerABI.c.obj" -x c "E:\\Program\\MSYS64\\clang64\\share\\cmake\\Modules\\CMakeCCompilerABI.c"
-clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu
-ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"
-ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"
-#include "..." search starts here:
-#include <...> search starts here:
- E:/Program/MSYS64/clang64/lib/clang/15.0.7/include
- E:/Program/MSYS64/clang64/include
-End of search list.
-Linking C executable cmTC_ee276.exe
-E:\Program\MSYS64\clang64\bin\cmake.exe -E cmake_link_script CMakeFiles\cmTC_ee276.dir\link.txt --verbose=1
-E:\Program\MSYS64\clang64\bin\cmake.exe -E rm -f CMakeFiles\cmTC_ee276.dir/objects.a
-E:\Program\MSYS64\clang64\bin\llvm-ar.exe qc CMakeFiles\cmTC_ee276.dir/objects.a @CMakeFiles\cmTC_ee276.dir\objects1
-E:\Program\MSYS64\clang64\bin\clang.exe  -v -Wl,--whole-archive CMakeFiles\cmTC_ee276.dir/objects.a -Wl,--no-whole-archive -o cmTC_ee276.exe -Wl,--out-implib,libcmTC_ee276.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+ "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-g2jcl5 -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_e4e1e.dir\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-g2jcl5 -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj -x c E:/Program/MSYS64/clang64/share/cmake/Modules/CMakeCCompilerABI.c
+clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu
+ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"
+ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include
+ E:/Program/MSYS64/clang64/include
+End of search list.
+[2/2] Linking C executable cmTC_e4e1e.exe
 clang version 15.0.7
 Target: x86_64-w64-windows-gnu
 Thread model: posix
 InstalledDir: E:/Program/MSYS64/clang64/bin
- "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_ee276.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows --whole-archive "CMakeFiles\\cmTC_ee276.dir/objects.a" --no-whole-archive --out-implib libcmTC_ee276.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o
-mingw32-make[1]: Leaving directory 'E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3'
+ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_e4e1e.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_e4e1e.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o
 
 
 
@@ -73,42 +65,35 @@ Parsed C implicit include dir info from above output: rv=done
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld\.lld\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3]
+  ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-g2jcl5]
   ignore line: []
-  ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/mingw32-make.exe -f Makefile cmTC_ee276/fast && E:/Program/MSYS64/clang64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_ee276.dir\build.make CMakeFiles/cmTC_ee276.dir/build]
-  ignore line: [mingw32-make[1]: Entering directory 'E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3']
-  ignore line: [Building C object CMakeFiles/cmTC_ee276.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [E:\Program\MSYS64\clang64\bin\clang.exe   -v -MD -MT CMakeFiles/cmTC_ee276.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\cmTC_ee276.dir\CMakeCCompilerABI.c.obj.d -o CMakeFiles\cmTC_ee276.dir\CMakeCCompilerABI.c.obj -c E:\Program\MSYS64\clang64\share\cmake\Modules\CMakeCCompilerABI.c]
+  ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe cmTC_e4e1e && [1/2] Building C object CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj]
   ignore line: [clang version 15.0.7]
   ignore line: [Target: x86_64-w64-windows-gnu]
   ignore line: [Thread model: posix]
   ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
   ignore line: [ (in-process)]
-  ignore line: [ "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3 -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_ee276.dir\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_ee276.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-ih4db3 -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o "CMakeFiles\\cmTC_ee276.dir\\CMakeCCompilerABI.c.obj" -x c "E:\\Program\\MSYS64\\clang64\\share\\cmake\\Modules\\CMakeCCompilerABI.c"]
-  ignore line: [clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu]
-  ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"]
-  ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"]
-  ignore line: [#include "..." search starts here:]
-  ignore line: [#include <...> search starts here:]
-  ignore line: [ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include]
-  ignore line: [ E:/Program/MSYS64/clang64/include]
-  ignore line: [End of search list.]
-  ignore line: [Linking C executable cmTC_ee276.exe]
-  ignore line: [E:\Program\MSYS64\clang64\bin\cmake.exe -E cmake_link_script CMakeFiles\cmTC_ee276.dir\link.txt --verbose=1]
-  ignore line: [E:\Program\MSYS64\clang64\bin\cmake.exe -E rm -f CMakeFiles\cmTC_ee276.dir/objects.a]
-  ignore line: [E:\Program\MSYS64\clang64\bin\llvm-ar.exe qc CMakeFiles\cmTC_ee276.dir/objects.a @CMakeFiles\cmTC_ee276.dir\objects1]
-  ignore line: [E:\Program\MSYS64\clang64\bin\clang.exe  -v -Wl --whole-archive CMakeFiles\cmTC_ee276.dir/objects.a -Wl --no-whole-archive -o cmTC_ee276.exe -Wl --out-implib libcmTC_ee276.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+  ignore line: [ "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-g2jcl5 -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_e4e1e.dir\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-g2jcl5 -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj -x c E:/Program/MSYS64/clang64/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu]
+  ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"]
+  ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include]
+  ignore line: [ E:/Program/MSYS64/clang64/include]
+  ignore line: [End of search list.]
+  ignore line: [[2/2] Linking C executable cmTC_e4e1e.exe]
   ignore line: [clang version 15.0.7]
   ignore line: [Target: x86_64-w64-windows-gnu]
   ignore line: [Thread model: posix]
   ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
-  link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_ee276.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows --whole-archive "CMakeFiles\\cmTC_ee276.dir/objects.a" --no-whole-archive --out-implib libcmTC_ee276.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o]
+  link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_e4e1e.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_e4e1e.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o]
     arg [E:/Program/MSYS64/clang64/bin/ld.lld] ==> ignore
     arg [-m] ==> ignore
     arg [i386pep] ==> ignore
     arg [-Bdynamic] ==> search dynamic
     arg [-o] ==> ignore
-    arg [cmTC_ee276.exe] ==> ignore
+    arg [cmTC_e4e1e.exe] ==> ignore
     arg [E:/Program/MSYS64/clang64/lib/crt2.o] ==> obj [E:/Program/MSYS64/clang64/lib/crt2.o]
     arg [E:/Program/MSYS64/clang64/lib/crtbegin.o] ==> obj [E:/Program/MSYS64/clang64/lib/crtbegin.o]
     arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib]
@@ -116,11 +101,9 @@ Parsed C implicit link information from above output:
     arg [-LE:/Program/MSYS64/clang64/lib] ==> dir [E:/Program/MSYS64/clang64/lib]
     arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib]
     arg [-LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows] ==> dir [E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows]
-    arg [--whole-archive] ==> ignore
-    arg [CMakeFiles\\cmTC_ee276.dir/objects.a] ==> ignore
-    arg [--no-whole-archive] ==> ignore
+    arg [CMakeFiles/cmTC_e4e1e.dir/CMakeCCompilerABI.c.obj] ==> ignore
     arg [--out-implib] ==> ignore
-    arg [libcmTC_ee276.dll.a] ==> ignore
+    arg [libcmTC_e4e1e.dll.a] ==> ignore
     arg [--major-image-version] ==> ignore
     arg [0] ==> ignore
     arg [--minor-image-version] ==> ignore
@@ -159,39 +142,31 @@ Parsed C implicit link information from above output:
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem
+Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-x3sh87
 
-Run Build Command(s):E:/Program/MSYS64/clang64/bin/mingw32-make.exe -f Makefile cmTC_f1094/fast && E:/Program/MSYS64/clang64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_f1094.dir\build.make CMakeFiles/cmTC_f1094.dir/build
-mingw32-make[1]: Entering directory 'E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem'
-Building CXX object CMakeFiles/cmTC_f1094.dir/CMakeCXXCompilerABI.cpp.obj
-E:\Program\MSYS64\clang64\bin\clang++.exe   -v -MD -MT CMakeFiles/cmTC_f1094.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\cmTC_f1094.dir\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles\cmTC_f1094.dir\CMakeCXXCompilerABI.cpp.obj -c E:\Program\MSYS64\clang64\share\cmake\Modules\CMakeCXXCompilerABI.cpp
+Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe cmTC_f41fd && [1/2] Building CXX object CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj
 clang version 15.0.7
 Target: x86_64-w64-windows-gnu
 Thread model: posix
 InstalledDir: E:/Program/MSYS64/clang64/bin
  (in-process)
- "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_f1094.dir\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_f1094.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o "CMakeFiles\\cmTC_f1094.dir\\CMakeCXXCompilerABI.cpp.obj" -x c++ "E:\\Program\\MSYS64\\clang64\\share\\cmake\\Modules\\CMakeCXXCompilerABI.cpp"
+ "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-x3sh87 -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_f41fd.dir\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-x3sh87 -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj -x c++ E:/Program/MSYS64/clang64/share/cmake/Modules/CMakeCXXCompilerABI.cpp
 clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu
 ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1"
 ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"
-ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"
-#include "..." search starts here:
-#include <...> search starts here:
- E:/Program/MSYS64/clang64/include/c++/v1
- E:/Program/MSYS64/clang64/lib/clang/15.0.7/include
- E:/Program/MSYS64/clang64/include
-End of search list.
-Linking CXX executable cmTC_f1094.exe
-E:\Program\MSYS64\clang64\bin\cmake.exe -E cmake_link_script CMakeFiles\cmTC_f1094.dir\link.txt --verbose=1
-E:\Program\MSYS64\clang64\bin\cmake.exe -E rm -f CMakeFiles\cmTC_f1094.dir/objects.a
-E:\Program\MSYS64\clang64\bin\llvm-ar.exe qc CMakeFiles\cmTC_f1094.dir/objects.a @CMakeFiles\cmTC_f1094.dir\objects1
-E:\Program\MSYS64\clang64\bin\clang++.exe  -v -Wl,--whole-archive CMakeFiles\cmTC_f1094.dir/objects.a -Wl,--no-whole-archive -o cmTC_f1094.exe -Wl,--out-implib,libcmTC_f1094.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ E:/Program/MSYS64/clang64/include/c++/v1
+ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include
+ E:/Program/MSYS64/clang64/include
+End of search list.
+[2/2] Linking CXX executable cmTC_f41fd.exe
 clang version 15.0.7
 Target: x86_64-w64-windows-gnu
 Thread model: posix
 InstalledDir: E:/Program/MSYS64/clang64/bin
- "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_f1094.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows --whole-archive "CMakeFiles\\cmTC_f1094.dir/objects.a" --no-whole-archive --out-implib libcmTC_f1094.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o
-mingw32-make[1]: Leaving directory 'E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem'
+ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_f41fd.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_f41fd.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o
 
 
 
@@ -210,44 +185,37 @@ Parsed CXX implicit include dir info from above output: rv=done
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld\.lld\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem]
+  ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-x3sh87]
   ignore line: []
-  ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/mingw32-make.exe -f Makefile cmTC_f1094/fast && E:/Program/MSYS64/clang64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_f1094.dir\build.make CMakeFiles/cmTC_f1094.dir/build]
-  ignore line: [mingw32-make[1]: Entering directory 'E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem']
-  ignore line: [Building CXX object CMakeFiles/cmTC_f1094.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [E:\Program\MSYS64\clang64\bin\clang++.exe   -v -MD -MT CMakeFiles/cmTC_f1094.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\cmTC_f1094.dir\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles\cmTC_f1094.dir\CMakeCXXCompilerABI.cpp.obj -c E:\Program\MSYS64\clang64\share\cmake\Modules\CMakeCXXCompilerABI.cpp]
+  ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe cmTC_f41fd && [1/2] Building CXX object CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj]
   ignore line: [clang version 15.0.7]
   ignore line: [Target: x86_64-w64-windows-gnu]
   ignore line: [Thread model: posix]
   ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
   ignore line: [ (in-process)]
-  ignore line: [ "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_f1094.dir\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_f1094.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-fgkhem -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o "CMakeFiles\\cmTC_f1094.dir\\CMakeCXXCompilerABI.cpp.obj" -x c++ "E:\\Program\\MSYS64\\clang64\\share\\cmake\\Modules\\CMakeCXXCompilerABI.cpp"]
+  ignore line: [ "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-x3sh87 -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\cmTC_f41fd.dir\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-x3sh87 -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj -x c++ E:/Program/MSYS64/clang64/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu]
   ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1"]
   ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"]
-  ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"]
-  ignore line: [#include "..." search starts here:]
-  ignore line: [#include <...> search starts here:]
-  ignore line: [ E:/Program/MSYS64/clang64/include/c++/v1]
-  ignore line: [ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include]
-  ignore line: [ E:/Program/MSYS64/clang64/include]
-  ignore line: [End of search list.]
-  ignore line: [Linking CXX executable cmTC_f1094.exe]
-  ignore line: [E:\Program\MSYS64\clang64\bin\cmake.exe -E cmake_link_script CMakeFiles\cmTC_f1094.dir\link.txt --verbose=1]
-  ignore line: [E:\Program\MSYS64\clang64\bin\cmake.exe -E rm -f CMakeFiles\cmTC_f1094.dir/objects.a]
-  ignore line: [E:\Program\MSYS64\clang64\bin\llvm-ar.exe qc CMakeFiles\cmTC_f1094.dir/objects.a @CMakeFiles\cmTC_f1094.dir\objects1]
-  ignore line: [E:\Program\MSYS64\clang64\bin\clang++.exe  -v -Wl --whole-archive CMakeFiles\cmTC_f1094.dir/objects.a -Wl --no-whole-archive -o cmTC_f1094.exe -Wl --out-implib libcmTC_f1094.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+  ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ E:/Program/MSYS64/clang64/include/c++/v1]
+  ignore line: [ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include]
+  ignore line: [ E:/Program/MSYS64/clang64/include]
+  ignore line: [End of search list.]
+  ignore line: [[2/2] Linking CXX executable cmTC_f41fd.exe]
   ignore line: [clang version 15.0.7]
   ignore line: [Target: x86_64-w64-windows-gnu]
   ignore line: [Thread model: posix]
   ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
-  link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_f1094.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows --whole-archive "CMakeFiles\\cmTC_f1094.dir/objects.a" --no-whole-archive --out-implib libcmTC_f1094.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o]
+  link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_f41fd.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_f41fd.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o]
     arg [E:/Program/MSYS64/clang64/bin/ld.lld] ==> ignore
     arg [-m] ==> ignore
     arg [i386pep] ==> ignore
     arg [-Bdynamic] ==> search dynamic
     arg [-o] ==> ignore
-    arg [cmTC_f1094.exe] ==> ignore
+    arg [cmTC_f41fd.exe] ==> ignore
     arg [E:/Program/MSYS64/clang64/lib/crt2.o] ==> obj [E:/Program/MSYS64/clang64/lib/crt2.o]
     arg [E:/Program/MSYS64/clang64/lib/crtbegin.o] ==> obj [E:/Program/MSYS64/clang64/lib/crtbegin.o]
     arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib]
@@ -255,11 +223,9 @@ Parsed CXX implicit link information from above output:
     arg [-LE:/Program/MSYS64/clang64/lib] ==> dir [E:/Program/MSYS64/clang64/lib]
     arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib]
     arg [-LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows] ==> dir [E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows]
-    arg [--whole-archive] ==> ignore
-    arg [CMakeFiles\\cmTC_f1094.dir/objects.a] ==> ignore
-    arg [--no-whole-archive] ==> ignore
+    arg [CMakeFiles/cmTC_f41fd.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
     arg [--out-implib] ==> ignore
-    arg [libcmTC_f1094.dll.a] ==> ignore
+    arg [libcmTC_f41fd.dll.a] ==> ignore
     arg [--major-image-version] ==> ignore
     arg [0] ==> ignore
     arg [--minor-image-version] ==> ignore

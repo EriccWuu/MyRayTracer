@@ -4,8 +4,8 @@ Camera::Camera() {
     position = vec4(0.f, 0.f, 0.f, 1.f);
     direction = vec4(0.f, 0.f, -1.f, 0.f);
     up = vec4(0.f, 1.f, 0.f, 0.f);
-    right = vec4(cross(direction.xyz(), up.xyz()).normalize(), 0.f);
-    up = vec4(cross(right.xyz(), direction.xyz()).normalize(), 0.f);
+    right = vec4(cross(direction.xyz(), up.xyz()).normalize());
+    up = vec4(cross(right.xyz(), direction.xyz()).normalize());
     fov = 45;
     aspectRatio = 1;
     near = -0.5;
@@ -16,23 +16,22 @@ Camera::Camera() {
 
 Camera::Camera(vec3 pos, vec3 dir, vec3 u, double w, double h, double fov, double r, double n, double f) {
     position = vec4(pos, 1.f);
-    direction = vec4(dir.normalize(), 0.f);
-    right = vec4(cross(direction.xyz(), u).normalize(), 0.f);
-    up = vec4(cross(right.xyz(), direction.xyz()).normalize(), 0.f);
-    this->fov = fov*PI/180.0;
+    direction = vec4(dir.normalize());
+    right = vec4(cross(direction.xyz(), u).normalize());
+    up = vec4(cross(right.xyz(), direction.xyz()).normalize());
+    this->fov = fov;
     aspectRatio = r;
     near = n;
     far = f;
-    fov = fov;
     screen_w = w;
     screen_h = h;
 }
 
 void Camera::set(vec3 pos, vec3 dir, vec3 u, double w, double h, double fov, double r, double n, double f) {
     position = vec4(pos, 1.f);
-    direction = vec4(dir.normalize(), 0.f);
-    right = vec4(cross(direction.xyz(), u).normalize(), 0.f);
-    up = vec4(cross(right.xyz(), direction.xyz()).normalize(), 0.f);
+    direction = vec4(dir.normalize());
+    right = vec4(cross(direction.xyz(), u).normalize());
+    up = vec4(cross(right.xyz(), direction.xyz()).normalize());
     this->fov = fov;
     aspectRatio = r;
     near = n;
@@ -46,15 +45,15 @@ double Camera::width() {
 }
 
 double Camera::height() {
-    return -2*near*tan(fov*PI/180/2);
+    return -2*near*std::tan(fov*PI/180/2);
 }
 
 vec3 Camera::viewport_u() {
-    return right.xyz().normalize() * width();
+    return vec3(1, 0, 0) * width() / screen_w;
 }
 
 vec3 Camera::viewport_v() {
-    return -up.xyz().normalize() * height();
+    return vec3(0, 1, 0) * height() / screen_h;
 }
 
 mat4 Camera::view() {

@@ -43,6 +43,13 @@ struct TGAColor {
         bgra[3] = a;
     }
 
+    TGAColor(const vec4 &color) {
+        bgra[0] = color.z;
+        bgra[1] = color.y;
+        bgra[2] = color.x;
+        bgra[3] = color.w;
+    }
+
     BYTE& operator[] (const int i) { return bgra[i]; }
 
     TGAColor& operator= (const vec4 &c) {
