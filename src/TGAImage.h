@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <fstream>
 #include <vector>
-#include "Matrix.h"
+#include "MathLib.h"
 
 typedef std::uint8_t BYTE;
 typedef std::uint16_t WORD;

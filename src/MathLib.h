@@ -1,14 +1,35 @@
-#ifndef __MATRIX_H__
-#define __MATRIX_H__
+#ifndef __MATHLIB_H__
+#define __MATHLIB_H__
 
 #pragma once
 
 #include <cmath>
 #include <math.h>
+#include <random>
 #include <cassert>
 #include <iostream>
 
+#define INF std::numeric_limits<double>::infinity()
 #define PI 3.141592653589793115997963468544185161590576171875
+
+/********************************************************************************
+*                                Utility Methods                                *
+********************************************************************************/
+inline double deg2rad(double degrees) {
+    return degrees * PI / 180.0;
+}
+
+inline double randDouble() {
+    // Returns a random real in [0,1).
+    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+    static std::mt19937 generator;
+    return distribution(generator);
+}
+
+inline double randDouble(double min, double max) {
+    // Returns a random real in [min,max).
+    return min + (max-min)*randDouble();
+}
 
 /********************************************************************************
 *                               Vector Defination                               *
@@ -36,7 +57,6 @@ template<int n, typename T> struct vec {
 
     inline T norm2() const { return *this * *this; }
     inline T norm()  const { return std::sqrt(norm2()); }
-    // inline vec & normalize() { *this = (*this) * (1 / norm()); return *this; }
     inline vec normalize() const { return (*this) * (1 / norm()); }
 };
 
@@ -49,71 +69,82 @@ template<int n,typename T> std::ostream& operator<< (std::ostream& out, const ve
 };
 
 // overload operator +, vector - vector addition
-template<int n, typename T> vec<n,T> operator+ (const vec<n,T>& u, const vec<n,T>& v) {
+template<int n, typename T>
+inline vec<n,T> operator+ (const vec<n,T>& u, const vec<n,T>& v) {
     vec<n,T> res = u;
     for (int i = n; i--; res[i] += v[i]) ;
     return res;
 };
 
 // overload operator +, vector - scalar addition
-template<int n, typename T> vec<n,T> operator+ (const vec<n,T>& u, const T& k) {
+template<int n, typename T>
+inline vec<n,T> operator+ (const vec<n,T>& u, const T& k) {
     vec<n,T> res = u;
     for (int i = n; i--; res[i] += k) ;
     return res;
 };
 
 // overload operator -, vector - vector subtraction
-template<int n, typename T> vec<n,T> operator- (const vec<n,T>& u, const vec<n,T>& v) {
+template<int n, typename T>
+inline vec<n,T> operator- (const vec<n,T>& u, const vec<n,T>& v) {
     vec<n,T> res = u;
     for (int i = n; i--; res[i] -= v[i]) ;
     return res;
 };
 
 // overload operator -, vector - scalar subtraction
-template<int n, typename T> vec<n,T> operator- (const vec<n,T>& u, const T x) {
+template<int n, typename T>
+inline vec<n,T> operator- (const vec<n,T>& u, const T x) {
     vec<n,T> res = u;
     for (int i = n; i--; res[i] -= x) ;
     return res;
 };
 
 // overload operator *, vector dot product
-template<int n, typename T> T operator* (const vec<n,T>& u, const vec<n,T>& v) {
+template<int n, typename T>
+inline T operator* (const vec<n,T>& u, const vec<n,T>& v) {
     T res = 0;
     for (int i = n; i--; res += u[i] * v[i]) ;
     return res;
 };
 
 // overload operator *, vector - scalar multipication
-template<int n, typename T> vec<n,T> operator* (const T& k, const vec<n,T>& u) {
+template<int n, typename T>
+inline vec<n,T> operator* (const T& k, const vec<n,T>& u) {
     vec<n,T> res = u;
     for (int i = n; i--; res[i] *= k) ;
     return res;
 };
 
 // overload operator *, vector - scalar multipication
-template<int n, typename T> vec<n,T> operator* (const vec<n,T>& u, const T& k) {
+template<int n, typename T>
+inline vec<n,T> operator* (const vec<n,T>& u, const T& k) {
     return k * u;
 };
 
 // overload operator /, vector - scalar division
-template<int n, typename T> vec<n,T> operator/ (const vec<n,T>& u, const T& k) {
+template<int n, typename T> vec<n,T>
+inline operator/ (const vec<n,T>& u, const T& k) {
     return (1 / k) * u;
 };
 
 // vector element-wise product
-template<int n, typename T> vec<n,T> mult(const vec<n,T> &v1, const vec<n,T> &v2) {
+template<int n, typename T> vec<n,T>
+inline mult(const vec<n,T> &v1, const vec<n,T> &v2) {
     vec<n,T> res;
     for (int i = n; i--; res[i] = v1[i] * v2[i]) ;
     return res;
 }
 
-template<int n1, int n2, typename T> vec<n1,T> embed(const vec<n2,T>& v, T fill = 0) {
+template<int n1, int n2, typename T>
+inline vec<n1,T> embed(const vec<n2,T>& v, T fill = 0) {
     vec<n1,T> res;
     for (int i = n1; i--; res[i] = (i < n2) ? v[i] : fill) ;
     return res;
 }
 
-template<int n1, int n2, typename T> vec<n1,T> slice(const vec<n2,T> v, const int m=0, const int n=n1-1) {
+template<int n1, int n2, typename T>
+inline vec<n1,T> slice(const vec<n2,T> v, const int m=0, const int n=n1-1) {
     assert(n2 > (n - m + 1) && n >= m);
     vec<n1,T> res;
     for (int i = 0, j = m; j <= n; i++, j++) res[i] = v[j];
@@ -121,7 +152,8 @@ template<int n1, int n2, typename T> vec<n1,T> slice(const vec<n2,T> v, const in
 }
 
 // compute the projection of u onto v
-template<int n, typename T> vec<n,T> proj(const vec<n,T>& u, const vec<n,T>& v) {
+template<int n, typename T> 
+inline vec<n,T> proj(const vec<n,T>& u, const vec<n,T>& v) {
     vec<n,T> res = u;
     vec<n,T> vNorm = (1 / v.norm()) * v;
     return (res *  vNorm) * vNorm;
@@ -149,7 +181,6 @@ template<> struct vec<2,double> {
 
     inline double norm2() const { return x*x + y*y; }
     inline double norm()  const { return sqrt(norm2()); }
-    // inline vec & normalize() { *this = (*this) / norm(); return *this; }
     inline vec normalize() const { return (*this) * (1 / norm()); }
 };
 
@@ -177,8 +208,15 @@ template<> struct vec<3,double> {
 
     inline double norm2() const { return x*x + y*y + z*z; }
     inline double norm()  const { return sqrt(norm2()); }
-    // inline vec & normalize() { *this = (*this) * (1 / norm()); return *this; }
     inline vec normalize() const { return (*this) * (1 / norm()); }
+    // vector compnent-wise product
+    inline vec mult(const vec<3,double> &v) {
+        return {x*v.x, y*v.y, z*v.z};
+    }
+    // vector cross product
+    inline vec cross(const vec<3,double> &v) const {
+        return {y*v.z - z*v.y, z*v.x - x*v.z, x*v.y - y*v.x};
+    }
 };
 
 // overload operator +, vec3 + vec3
@@ -221,7 +259,7 @@ inline vec<3,double> operator/(const vec<3,double> &v, const double &k) {
     return (1/k) * v;
 }
 
-// vector element-wise product
+// vector compnent-wise product
 inline vec<3,double> mult(const vec<3,double> &v1, const vec<3,double> &v2) {
     return {v1.x*v2.x, v1.y*v2.y, v1.z*v2.z};
 }
@@ -244,7 +282,6 @@ template<> struct vec<4,double> {
     inline vec<3,double> xyz() { return vec<3,double>(x, y, z); }
     inline double norm2() const { return x*x + y*y + z*z + w*w; }
     inline double norm()  const { return sqrt(norm2()); }
-    // inline vec & normalize() { *this = (*this) * (1 / norm()); return *this; }
     inline vec normalize() const { return (*this) * (1 / norm()); }
 };
 
@@ -255,7 +292,6 @@ inline double operator*(const vec<4,double> &u, const vec<4,double> &v) {
 typedef vec<2,double> vec2;
 typedef vec<3,double> vec3;
 typedef vec<4,double> vec4;
-
 
 /********************************************************************************
 *                               Matrix Defination                               *
@@ -319,7 +355,7 @@ template<int N, typename T> T detGauss(mat<N,N,T> m) {
     return (swaps % 2 == 0) ? determinant : -determinant;
 }
 
-template<int N, typename T> T det(mat<N,N,T> m) {
+template<int N, typename T> inline T det(mat<N,N,T> m) {
     if (N < 6)  return detRecursive(m);
     else        return detGauss(m);
 }
@@ -393,7 +429,7 @@ template<int nrows, int ncols, typename T> struct mat {
     }
 
     // compute the invert matrix using Gauss-Jordan elimination
-    inline mat<nrows,ncols,T> invert() const {
+    mat<nrows,ncols,T> invert() const {
         if (nrows != ncols) return zero();
         mat<nrows, nrows*2, T> augmentedMatrix;
 
@@ -433,48 +469,55 @@ template<int nrows, int ncols, typename T> struct mat {
 };
 
 // override operator <<, print matrix
-template<int nrows, int ncols, typename T> std::ostream& operator<< (std::ostream& out, const mat<nrows,ncols,T>& m) {
+template<int nrows, int ncols, typename T>
+std::ostream& operator<< (std::ostream& out, const mat<nrows,ncols,T>& m) {
     for (int i = 0; i < nrows; i++) std::cout << m[i] << std::endl;
     return out;
 }
 
 // override operator +, matrix - matrix addition
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator+ (const mat<nrows,ncols,T>& m, const mat<nrows,ncols,T>& n) {
+template<int nrows, int ncols, typename T> mat<nrows,ncols,T>
+inline operator+ (const mat<nrows,ncols,T>& m, const mat<nrows,ncols,T>& n) {
     mat<nrows,ncols,T> res;
     for (int i = nrows; i--; res[i] = m[i] + n[i]) ;
     return res;
 }
 
 // override operator +, matrix - scalar addition
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator+ (const mat<nrows,ncols,T>& m, const T& k) {
+template<int nrows, int ncols, typename T> mat<nrows,ncols,T>
+inline operator+ (const mat<nrows,ncols,T>& m, const T& k) {
     mat<nrows,ncols,T> res;
     for (int i = nrows; i--; res[i] = m[i] + k);
     return res;
 }
 
 // override operator -, matrix - matrix subtraction
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator- (const mat<nrows,ncols,T>& m, const mat<nrows,ncols,T>& n) {
+template<int nrows, int ncols, typename T> mat<nrows,ncols,T>
+inline operator- (const mat<nrows,ncols,T>& m, const mat<nrows,ncols,T>& n) {
     mat<nrows,ncols,T> res;
     for (int i = nrows; i--; res[i] = m[i] - n[i]);
     return res;
 }
 
 // override operator -, matrix - scalar addition
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator- (const mat<nrows,ncols,T>& m, const T& k) {
+template<int nrows, int ncols, typename T> mat<nrows,ncols,T>
+inline operator- (const mat<nrows,ncols,T>& m, const T& k) {
     mat<nrows,ncols,T> res;
     for (int i = nrows; i--; res[i] = m[i] - k) ;
     return res;
 }
 
 // override operator *, matrix - vector multiplication
-template<int nrows, int ncols, typename T> vec<nrows,T> operator* (const mat<nrows,ncols,T>& m, const vec<ncols,T>& v) {
+template<int nrows, int ncols, typename T>
+inline vec<nrows,T> operator* (const mat<nrows,ncols,T>& m, const vec<ncols,T>& v) {
     vec<nrows,T> res;
     for (int i = nrows; i-- ; res[i] = m[i] * v) ;
     return res;
 }
 
 // override operator *, matrix - matrix multiplication
-template<int M, int N, int K, typename T> mat<M,K,T> operator* (const mat<M,N,T>& lhs, const mat<N,K,T>& rhs) {
+template<int M, int N, int K, typename T>
+inline mat<M,K,T>operator* (const mat<M,N,T>& lhs, const mat<N,K,T>& rhs) {
     mat<M,K,T> res;
     for (int i = M; i--; )
         for (int j = K; j--; res[i][j] = lhs[i] * rhs.col(j)) ;
@@ -482,23 +525,100 @@ template<int M, int N, int K, typename T> mat<M,K,T> operator* (const mat<M,N,T>
 }
 
 // override operator *, matrix - scalar multiplicat number
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator* (const T& k, const mat<nrows,ncols,T>& m) {
+template<int nrows, int ncols, typename T>
+inline mat<nrows,ncols,T> operator* (const T& k, const mat<nrows,ncols,T>& m) {
     mat<nrows,ncols,T> res;
     for (int i = nrows; i--; res[i] = m[i] * k) ;
     return res;
 }
 
 // override operator *, matrix - scalar multiplicat number
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator* (const mat<nrows,ncols,T>& m, const T& k) {
+template<int nrows, int ncols, typename T>
+inline mat<nrows,ncols,T> operator* (const mat<nrows,ncols,T>& m, const T& k) {
     return k * m;
 }
 
 // override operator /, matrix - scalar division
-template<int nrows, int ncols, typename T> mat<nrows,ncols,T> operator/ (const mat<nrows,ncols,T>& m, const T& k) {
+template<int nrows, int ncols, typename T>
+inline mat<nrows,ncols,T> operator/ (const mat<nrows,ncols,T>& m, const T& k) {
     mat<nrows,ncols,T> res;
     for (int i = nrows; i--; res[i] = m[i] / k) ;
     return res;
 }
+
+// Specialization for nrows == ncols == 3
+template<typename T> struct mat<3,3,T> {
+    vec<3,T> rows[3] = {{}};
+
+    vec<3,T>& operator[] (const int idx)       { assert(idx >= 0 && idx < 3); return rows[idx]; }
+    const vec<3,T>& operator[] (const int idx) const { assert(idx >= 0 && idx < 3); return rows[idx]; }
+
+    static mat<3,3,T> zero() {
+        return {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
+    }
+
+    static mat<3,3,T> identity() {
+        return {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
+    }
+
+    inline vec<3,T> col(const int idx) const {
+        assert(idx >= 0 && idx < 3);
+        return { rows[0][idx], rows[1][idx], rows[2][idx] };
+    }
+
+    inline void setCol(const int idx, const vec<3,T>& v) {
+        assert(idx >= 0 && idx < 3);
+        rows[0][idx] = v[0];
+        rows[1][idx] = v[1];
+        rows[2][idx] = v[2];
+    }
+
+    inline mat<3,3,T> transpose() const {
+        mat<3, 3, T> res;
+        res[0] = this->col(0);
+        res[1] = this->col(1);
+        res[2] = this->col(2);
+        return res;
+    }
+};
+
+// Specialization for nrows == ncols == 4
+template<typename T> struct mat<4,4,T> {
+    vec<4,T> rows[4] = {{}};
+
+    vec<4,T>& operator[] (const int idx)       { assert(idx >= 0 && idx < 4); return rows[idx]; }
+    const vec<4,T>& operator[] (const int idx) const { assert(idx >= 0 && idx < 4); return rows[idx]; }
+
+    static mat<4,4,T> zero() {
+        return {{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}};
+    }
+
+    static mat<4,4,T> identity() {
+        return {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+    }
+
+    inline vec<4,T> col(const int idx) const {
+        assert(idx >= 0 && idx < 4);
+        return { rows[0][idx], rows[1][idx], rows[2][idx], rows[3][idx] };
+    }
+
+    inline void setCol(const int idx, const vec<4,T>& v) {
+        assert(idx >= 0 && idx < 4);
+        rows[0][idx] = v[0];
+        rows[1][idx] = v[1];
+        rows[2][idx] = v[2];
+        rows[3][idx] = v[3];
+    }
+
+    inline mat<4,4,T> transpose() const {
+        mat<4,4,T> res;
+        res[0] = this->col(0);
+        res[1] = this->col(1);
+        res[2] = this->col(2);
+        res[3] = this->col(3);
+        return res;
+    }
+};
 
 typedef mat<3,3,double> mat3;
 typedef mat<4,4,double> mat4;
@@ -509,6 +629,56 @@ inline vec3 operator* (const mat3& m, const vec3& v) {
 
 inline vec4 operator* (const mat4& m, const vec4& v) {
     return {m[0]*v, m[1]*v, m[2]*v, m[3]*v};
+}
+
+/********************************************************************************
+*                           Matrix utility function                             *
+********************************************************************************/
+inline mat4 scale(const double &s) {
+    mat4 S = mat4::identity();
+    for (int i = 0; i < 3; i ++) S[i][i] = s;
+    return S;
+}
+
+inline mat4 translate(const vec3 &t) {
+    mat4 T = mat4::identity();
+    for (int i = 0; i < 3; i ++) T[i][3] = t[i];
+    return T;
+}
+
+inline mat4 rotateX(const double &degree) {
+    double radian = deg2rad(degree);
+    mat4 R;
+    R = {{{1.f, 0.f, 0.f, 0.f},
+                {0.f, cos(radian), -sin(radian), 0.f},
+                {0.f, sin(radian), cos(radian), 0.f},
+                {0.f, 0.f, 0.f, 1.f}}};
+    return R;
+}
+
+inline mat4 rotateY(const double &degree) {
+    double radian = deg2rad(degree);
+    mat4 R;
+    R = {{{cos(radian), 0.f, sin(radian), 0.f},
+                {0.f, 1.f, 0.f, 0.f},
+                {-sin(radian), 0.f, cos(radian), 0.f},
+                {0.f, 0.f, 0.f, 1.f}}};
+    return R;
+}
+
+inline mat4 rotateZ(const double &degree) {
+    double radian = deg2rad(degree);
+    mat4 R;
+    R = {{{ cos(radian), -sin(radian), 0.f, 0.f},
+                { sin(radian),  cos(radian), 0.f, 0.f},
+                { 0.f, 0.f, 1.f, 0.f},
+                { 0.f, 0.f, 0.f, 1.f}}};
+    return R;
+}
+
+inline mat4 rotate(const vec3 &n, const double &degree) {
+    mat4 R = mat4::identity();
+    return R;
 }
 
 #endif
