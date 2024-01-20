@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "stdio.h"
 
 /******************************************************************
 *                    Public Method Defination                     *
@@ -34,8 +35,8 @@ mat4 Camera::view() {
     vec3 x = cross(up.xyz(), z).normalize();
     vec3 y = cross(z, x).normalize();
 
-    mat4 Rview = mat4::identity();
-    mat4 Tview = mat4::identity();
+    mat4 Rview = E44;
+    mat4 Tview = E44;
     Tview[0][3] = -position.x;
     Tview[1][3] = -position.y;
     Tview[2][3] = -position.z;
@@ -63,7 +64,7 @@ mat4 Camera::projection() {
 }
 
 mat4 Camera::viewport() {
-    mat4 viewport = mat4::identity();
+    mat4 viewport = E44;
     viewport[0][3] = screen_w / 2.f;
     viewport[1][3] = screen_h / 2.f;
     viewport[0][0] = screen_w / 2.f;
@@ -72,31 +73,29 @@ mat4 Camera::viewport() {
 }
 
 void Camera::init() {
-    view_o = vec3(0, 0, 0);
-    viewport_o = vec3(0, 0, 1) * near;
-    viewport_u = vec3(1, 0, 0) * width() / screen_w;
-    viewport_v = vec3(0, 1, 0) * height() / screen_h;
+    viewO = vec3(0, 0, 0);
+    viewportO = ZA * near;
+    viewportU = XA * width() / screen_w;
+    viewportV = -YA * height() / screen_h;
 }
 
 void Camera::render(Interlist &objects, TGAImage &image) {
     init();
-    Inter_record rec;
 
     for (int j = 0; j < screen_h; j ++) {
-        std::cout << "\rScanlines remaining: " << (screen_h - 1 - j) << ' ' << std::flush;
+        fprintf(stderr, "\rRenderering (%d spp): %5.2f%%", spp, 100.*j/(screen_h-1));
         for (int i = 0; i < screen_w; i ++) {
-            Ray ray = getRay(i, j);
-            double a = 0.5*(ray.direction().y + 1.0);
-            vec3 color;
-            if (!intersect_all(objects, ray, Interval(0, INF), rec)) {
-                color = 255*((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
-                image.set(i, screen_h-j, TGAColor(color));
-                continue;
+            vec3 color(0, 0, 0);
+            for (int k = 0; k < spp; k ++) {
+                Ray ray = getRay(i, j);
+                color += radiance(ray, maxDepth, objects);
             }
-            color = 0.5*(rec.normal + 1);
-            image.set(i, screen_h-j, TGAColor(255*color));
+            color = clampVec3(color / spp); // Clamp to [0, 1]
+            gammaCorrection(color); // Gamma correction
+            image.set(i, j, TGAColor(255*color));
         }
     }
+    std::cout << '\n';
 }
 
 /******************************************************************
@@ -111,32 +110,50 @@ inline double Camera::height() {
 }
 
 Ray Camera::getRay(const int &i, const int &j) {
-    vec3 pixPos = viewport_o + (i - (screen_w >> 1) + 0.5)*viewport_u + (j - (screen_h >> 1) + 0.5)*viewport_v;
+    vec3 pixPos = viewportO + (i - (screen_w >> 1) + 0.5)*viewportU + (j - (screen_h >> 1) + 0.5)*viewportV;
     pixPos += pixSampleSquare();
-    return Ray(view_o, pixPos);
+    return Ray(viewO, pixPos);
+}
+
+vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
+    InterRecord rec;
+
+    if (intersect_all(obj, r, Interval(0.001, INF), rec)) {
+        Ray scattered;
+        vec3 attenuation;
+        if (rec.mat->scatter(r, rec, scattered, attenuation))
+            return radiance(scattered, depth-1, obj).mult(attenuation);
+        return ZERO_VEC3;
+    }
+    double a = 0.5*(r.direction().normalize().y + 1.0);
+    return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
 }
 
 inline vec3 Camera::pixSampleSquare() {
-    double dx = randDouble() - 0.5;
-    double dy = randDouble() - 0.5;
-    return viewport_u*dx + viewport_v*dy;
+    vec2 sample = sampleUnitSpuare();
+    double sx = sample.x - 0.5;
+    double sy = sample.y - 0.5;
+    return viewportU*sx + viewportV*sy;
 }
 
-// vec3 Camera::pixSampleDisk(double radius) {
+inline vec3 Camera::pixSampleDisk(double radius) {
+    vec2 sample = sampleUnitDisk();
+    sample *= radius;
+    return viewportU*sample.x + viewportV*sample.y;
+}
 
-// }
-
-bool Camera::intersect_all(Interlist &objects, const Ray &ray, Interval rayt, Inter_record &rec) {
-    Inter_record tmp_rec;
+bool Camera::intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec) {
+    InterRecord tmp_rec;
     bool hit_anything = false;
     
-    for (const auto& obj: objects) {
+    for (const auto& obj: obj) {
         if (obj->intersect(ray, rayt, tmp_rec)) {
             hit_anything = true;
             rayt.max = tmp_rec.t;
             rec = tmp_rec;
         }
     }
+
     return hit_anything;
 }
 

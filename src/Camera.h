@@ -15,6 +15,7 @@ public:
     double aspectRatio;
     double near, far;
     int screen_w, screen_h;
+    int spp, maxDepth;
 
     TGAImage frame;
     TGAImage zbuffer;
@@ -30,15 +31,16 @@ public:
     void render(Interlist &objects, TGAImage &image);
 
 private:
-    vec3 view_o;
-    vec3 viewport_o, viewport_u, viewport_v;
+    vec3 viewO;
+    vec3 viewportO, viewportU, viewportV;
 
     inline double width();
     inline double height();
     Ray  getRay(const int &i, const int &j);
+    vec3 radiance(const Ray &r, int depth, const Interlist &obj);
     vec3 pixSampleSquare();
     vec3 pixSampleDisk(double radius);
-    bool intersect_all(Interlist &objects, const Ray &ray, Interval rayt, Inter_record &rec);
+    bool intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec);
 };
 
 #endif

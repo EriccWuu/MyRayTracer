@@ -1,13 +1,9 @@
 # ninja log v5
-4	769	7273539028038927	CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj	f367770c0bf8668
-7	791	7273539028320254	CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj	d3b73d5d306c977a
-10	848	7273539028872339	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	d22f503abfa53048
-848	977	7273539030154440	MyRayTracer.exe	c53cb604282099ec
-11	1045	7273551046116557	CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj	d3b73d5d306c977a
-13	1092	7273551046651631	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	d22f503abfa53048
-7	1240	7273551048100862	CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj	f367770c0bf8668
-1240	1344	7273551049131039	MyRayTracer.exe	c53cb604282099ec
-26	902	7273569744536952	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	d22f503abfa53048
-19	904	7273569744526815	CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj	f367770c0bf8668
-22	924	7273569744617164	CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj	d3b73d5d306c977a
-924	1070	7273569746209577	MyRayTracer.exe	c53cb604282099ec
+19	897	7274531043770020	CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj	f367770c0bf8668
+964	1063	7274531125152007	MyRayTracer.exe	c53cb604282099ec
+24	964	7274531124178598	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	d22f503abfa53048
+25	1116	7274509085773826	CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj	d3b73d5d306c977a
+21	927	7274531767449980	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	d22f503abfa53048
+928	1026	7274531768404219	MyRayTracer.exe	c53cb604282099ec
+20	968	7274532404020840	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	d22f503abfa53048
+968	1076	7274532405077961	MyRayTracer.exe	c53cb604282099ec

@@ -9,27 +9,9 @@
 #include <cassert>
 #include <iostream>
 
-#define INF std::numeric_limits<double>::infinity()
-#define PI 3.141592653589793115997963468544185161590576171875
-
-/********************************************************************************
-*                                Utility Methods                                *
-********************************************************************************/
-inline double deg2rad(double degrees) {
-    return degrees * PI / 180.0;
-}
-
-inline double randDouble() {
-    // Returns a random real in [0,1).
-    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-    static std::mt19937 generator;
-    return distribution(generator);
-}
-
-inline double randDouble(double min, double max) {
-    // Returns a random real in [min,max).
-    return min + (max-min)*randDouble();
-}
+const double INF = std::numeric_limits<double>::infinity();
+const double EPS = std::numeric_limits<double>::epsilon();
+const double PI  = 3.141592653589793115997963468544185161590576171875;
 
 /********************************************************************************
 *                               Vector Defination                               *
@@ -159,6 +141,7 @@ inline vec<n,T> proj(const vec<n,T>& u, const vec<n,T>& v) {
     return (res *  vNorm) * vNorm;
 }
 
+// Specialization for vec<2,double>
 template<> struct vec<2,double> {
     double x{}, y{};
 
@@ -184,6 +167,7 @@ template<> struct vec<2,double> {
     inline vec normalize() const { return (*this) * (1 / norm()); }
 };
 
+// Specialization for vec<3,double>
 template<> struct vec<3,double> {
     double x{}, y{}, z{};
 
@@ -192,7 +176,7 @@ template<> struct vec<3,double> {
     double & operator[] (const int i)       { assert(i >= 0 && i < 3); return i ? (i == 2 ? z : y) : x; }
     double   operator[] (const int i) const { assert(i >= 0 && i < 3); return i ? (i == 2 ? z : y) : x; }
     inline vec  operator-() const { return {-x, -y, -z}; }
-    inline vec& operator+=(const vec<3,double> &v) {
+    inline vec& operator+=(const vec &v) {
         x += v.x;
         y += v.y;
         z += v.z;
@@ -269,17 +253,17 @@ inline vec<3,double> cross(const vec<3,double> &v1, const vec<3,double> &v2) {
     return {v1.y*v2.z - v1.z*v2.y, v1.z*v2.x - v1.x*v2.z, v1.x*v2.y - v1.y*v2.x};
 }
 
+// Specialization for vec<4,double>
 template<> struct vec<4,double> {
     double x{}, y{}, z{}, w{};
 
     vec() = default;
     vec(double x_, double y_, double z_, double w_ = 0.0): x(x_), y(y_), z(z_), w(w_) {}
-    // vec(vec<3,double> v): x(v.x), y(v.y), z(v.z), w(0.f) {}
     vec(vec<3,double> v, double w=0.0): x(v.x), y(v.y), z(v.z), w(w) {}
     double & operator[] (const int i)       { assert(i >= 0 && i < 4); return i ? (i == 3 ? w : (i == 2 ? z : y)) : x; }
     double   operator[] (const int i) const { assert(i >= 0 && i < 4); return i ? (i == 3 ? w : (i == 2 ? z : y)) : x; }
 
-    inline vec<3,double> xyz() { return vec<3,double>(x, y, z); }
+    inline vec<3,double> xyz() { return {x, y, z}; }
     inline double norm2() const { return x*x + y*y + z*z + w*w; }
     inline double norm()  const { return sqrt(norm2()); }
     inline vec normalize() const { return (*this) * (1 / norm()); }
@@ -553,14 +537,6 @@ template<typename T> struct mat<3,3,T> {
     vec<3,T>& operator[] (const int idx)       { assert(idx >= 0 && idx < 3); return rows[idx]; }
     const vec<3,T>& operator[] (const int idx) const { assert(idx >= 0 && idx < 3); return rows[idx]; }
 
-    static mat<3,3,T> zero() {
-        return {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-    }
-
-    static mat<3,3,T> identity() {
-        return {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
-    }
-
     inline vec<3,T> col(const int idx) const {
         assert(idx >= 0 && idx < 3);
         return { rows[0][idx], rows[1][idx], rows[2][idx] };
@@ -588,14 +564,6 @@ template<typename T> struct mat<4,4,T> {
 
     vec<4,T>& operator[] (const int idx)       { assert(idx >= 0 && idx < 4); return rows[idx]; }
     const vec<4,T>& operator[] (const int idx) const { assert(idx >= 0 && idx < 4); return rows[idx]; }
-
-    static mat<4,4,T> zero() {
-        return {{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}};
-    }
-
-    static mat<4,4,T> identity() {
-        return {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
-    }
 
     inline vec<4,T> col(const int idx) const {
         assert(idx >= 0 && idx < 4);
@@ -631,22 +599,106 @@ inline vec4 operator* (const mat4& m, const vec4& v) {
     return {m[0]*v, m[1]*v, m[2]*v, m[3]*v};
 }
 
+// Const value defination
+const vec3 XA = {1, 0, 0};
+const vec3 YA = {0, 1, 0};
+const vec3 ZA = {0, 0, 1};
+const vec3 ZERO_VEC3 = {0, 0, 0};
+const vec3 E3 = {1, 1, 1};
+const mat3 E33 = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
+const mat4 E44 = {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+
 /********************************************************************************
-*                           Matrix utility function                             *
+*                                Utility Methods                                *
 ********************************************************************************/
-inline mat4 scale(const double &s) {
-    mat4 S = mat4::identity();
+// Convert degree to radian
+inline double deg2rad(double degrees) {
+    return degrees * PI / 180.0;
+}
+
+// Clamp x to [min, max], default to [0, 1]
+inline double clamp(double x, double min=0, double max=1) {
+    return (x < min) ? min : ((x > max) ? max : x);
+}
+
+// Clamp vec3 to [min, max], default to [0, 1]
+inline vec3 clampVec3(const vec3& v, double min=0, double max=1) {
+    return {clamp(v.x, min, max), clamp(v.y, min, max), clamp(v.z, min, max)};
+}
+
+// Gamma correction with gamma level
+inline void gammaCorrection(vec3 &color, double gamma = 2.2) {
+    double gamma_recip = 1.0 / gamma;
+    color.x = pow(color.x, gamma_recip);
+    color.y = pow(color.y, gamma_recip);
+    color.z = pow(color.z, gamma_recip);
+}
+
+// Generate a random real in [0,1].
+inline double randDouble() {
+    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+    static std::mt19937 generator;
+    return distribution(generator);
+}
+
+// Generate a random real in [min,max].
+inline double randDouble(double min, double max) {
+    return min + (max-min)*randDouble();
+}
+
+// Sample in [0, 1]^2
+static vec2 sampleUnitSpuare() {
+    double x = randDouble();
+    double y = randDouble();
+    return vec2(x, y);
+}
+
+// Sample in uniu disk
+static vec2 sampleUnitDisk() {
+    double r = randDouble();
+    double phi = 2*PI*randDouble();
+    return vec2(r*cos(phi), r*sin(phi));
+}
+
+// Generate random vector in sphere
+static vec3 randVecSphere() {
+    // Assume that n is normalized
+    double phi = 2*PI*randDouble(), r = randDouble(-1, 1);
+    double a, b;
+    if (r > 0) { a = sqrt(1 - r), b = sqrt(r); }
+    else {a = sqrt(1 + r), b = sqrt(-r); }
+    return vec3(cos(phi)*a, sin(phi)*a, b);
+}
+
+// Generate random vector in hemisphere
+static vec3 randVecSemisphere(const vec3& n) {
+    // Assume that n is normalized
+    double phi = 2*PI*randDouble(), r = randDouble();
+    double a = sqrt(r), b = sqrt(1 - r);
+    vec3 u = YA.cross(n);
+    u = (u.norm() > EPS ? u : XA.cross(n)).normalize();
+    // u = (u.norm() > EPS ? u : XA.cross(n));
+    vec3 v = n.cross(u);
+    return (u*cos(phi)*a + v*sin(phi)*a + n*b);
+}
+
+inline vec3 reflect(const vec3& v, const vec3& n) {
+    return v - 2*(v*n)*n;
+}
+
+inline mat4 scale(double s) {
+    mat4 S = E44;
     for (int i = 0; i < 3; i ++) S[i][i] = s;
     return S;
 }
 
 inline mat4 translate(const vec3 &t) {
-    mat4 T = mat4::identity();
+    mat4 T = E44;
     for (int i = 0; i < 3; i ++) T[i][3] = t[i];
     return T;
 }
 
-inline mat4 rotateX(const double &degree) {
+inline mat4 rotateX(double degree) {
     double radian = deg2rad(degree);
     mat4 R;
     R = {{{1.f, 0.f, 0.f, 0.f},
@@ -656,7 +708,7 @@ inline mat4 rotateX(const double &degree) {
     return R;
 }
 
-inline mat4 rotateY(const double &degree) {
+inline mat4 rotateY(double degree) {
     double radian = deg2rad(degree);
     mat4 R;
     R = {{{cos(radian), 0.f, sin(radian), 0.f},
@@ -666,7 +718,7 @@ inline mat4 rotateY(const double &degree) {
     return R;
 }
 
-inline mat4 rotateZ(const double &degree) {
+inline mat4 rotateZ(double degree) {
     double radian = deg2rad(degree);
     mat4 R;
     R = {{{ cos(radian), -sin(radian), 0.f, 0.f},
@@ -676,8 +728,8 @@ inline mat4 rotateZ(const double &degree) {
     return R;
 }
 
-inline mat4 rotate(const vec3 &n, const double &degree) {
-    mat4 R = mat4::identity();
+inline mat4 rotate(const vec3 &n, double degree) {
+    mat4 R = E44;
     return R;
 }
 

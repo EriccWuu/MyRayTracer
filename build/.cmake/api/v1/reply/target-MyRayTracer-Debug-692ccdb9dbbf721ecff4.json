@@ -56,8 +56,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				3,
-				6
+				6,
+				9
 			]
 		}
 	],
@@ -95,8 +95,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				3,
-				6
+				6,
+				9
 			]
 		},
 		{
@@ -105,8 +105,11 @@
 			[
 				1,
 				2,
+				3,
 				4,
-				5
+				5,
+				7,
+				8
 			]
 		}
 	],
@@ -125,7 +128,22 @@
 		},
 		{
 			"backtrace" : 1,
+			"path" : "src/Intersectable.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/Material.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
 			"path" : "src/MathLib.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/Ray.h",
 			"sourceGroupIndex" : 1
 		},
 		{
