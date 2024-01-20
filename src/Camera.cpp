@@ -88,7 +88,7 @@ void Camera::render(Interlist &objects, TGAImage &image) {
             vec3 color(0, 0, 0);
             for (int k = 0; k < spp; k ++) {
                 Ray ray = getRay(i, j);
-                color += radiance(ray, maxDepth, objects);
+                color += radiance(ray, 0, objects);
             }
             color = clampVec3(color / spp); // Clamp to [0, 1]
             gammaCorrection(color); // Gamma correction
@@ -118,15 +118,21 @@ Ray Camera::getRay(const int &i, const int &j) {
 vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
     InterRecord rec;
 
-    if (intersect_all(obj, r, Interval(0.001, INF), rec)) {
-        Ray scattered;
-        vec3 attenuation;
-        if (rec.mat->scatter(r, rec, scattered, attenuation))
-            return radiance(scattered, depth-1, obj).mult(attenuation);
+    // Return if no intersection
+    if (!intersect_all(obj, r, Interval(0.001, INF), rec)) {
+        double a = 0.5*(r.direction().normalize().y + 1.0);
+        return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
+    }
+    // vec3 c = rec.mat->color();
+    // double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
+    if (++depth > maxDepth) {
         return ZERO_VEC3;
     }
-    double a = 0.5*(r.direction().normalize().y + 1.0);
-    return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
+
+    Ray scattered;
+    vec3 attenuation;
+    rec.mat->scatter(r, rec, scattered, attenuation);
+    return radiance(scattered, depth, obj).mult(attenuation);
 }
 
 inline vec3 Camera::pixSampleSquare() {
