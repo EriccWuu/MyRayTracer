@@ -35,11 +35,11 @@ public:
     bool intersect(const Ray &ray, Interval &rayt, InterRecord &rec) const override {
         // delta = (-b +- sqrt(b^2 - 4ac)) / 2
         // a = dir^2, b = 2*dir*op, c = op^2 - r^2
+        // Assumed that ray.dir is normalized
         double t;
         vec3 op = pos - ray.orig;   // -op
-        double a_recip = 1 / ray.dir.norm2();
-        double b = ray.dir * op * a_recip; // -b/2a
-        double det = b*b - (op*op - radius*radius)*a_recip;
+        double b = ray.dir * op; // -b
+        double det = b*b - (op*op - radius*radius);
         if (det < 0) return 0;  // onhit, return 0
         else det = std::sqrt(det);
 
@@ -52,7 +52,7 @@ public:
         rec.t = t;
         rec.p = ray.at(t);
         rec.normal = (rec.p - pos) / radius;
-        rec.inward = ray.dir * rec.normal;
+        rec.inward = (ray.dir * rec.normal < 0);
         rec.mat = mat;
         return true;
     }

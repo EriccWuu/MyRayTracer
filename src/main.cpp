@@ -10,22 +10,28 @@ int height = 450, width = (int)(height * aspectRatio);
 double fov = 60;
 double near = -1/std::tan(PI/6), far = -50;
 vec3 up = {0, 1, 0};
-vec3 camPos = {0, 0, 3};
-vec3 camDir = origin - camPos;
+vec3 camPos = {0, 2, 5};
+vec3 camDir = vec3(0, 0, -1);
+// vec3 camPos = {0, 2, 7};
+// vec3 camDir = origin - camPos;
 
 auto matGround = std::make_shared<Lambertian>(vec3(0.8, 0.8, 0.8));
+auto matBackWall = std::make_shared<Lambertian>(vec3(0.2, 0.2, 0.2));
 auto matLeftWall = std::make_shared<Lambertian>(vec3(0.75, 0.25, 0.25));
 auto matRightWall = std::make_shared<Lambertian>(vec3(0.25, 0.25, 0.75));
 auto matCenter = std::make_shared<Lambertian>(vec3(0.7, 0.3, 0.3));
-auto matLeft  = std::make_shared<Matel>(vec3(0.8, 0.8, 0.8), 0);
+// auto matCenter = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.5);
+// auto matLeft  = std::make_shared<Matel>(vec3(0.8, 0.8, 0.8), 0);
+auto matLeft  = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.5);
 auto matRight = std::make_shared<Matel>(vec3(0.8, 0.6, 0.2), 0.3);
 
-Sphere ground(vec3(0, -1e5 -2, -5), 1e5, matGround);
-Sphere leftWall(vec3(-1e5 - 15, 0, -5), 1e5, matLeftWall);
-Sphere rightWall(vec3(1e5 + 15, 0, -5), 1e5, matRightWall);
-Sphere sphere(vec3(0, 0, -5), 2, matCenter);
-Sphere left(vec3(-4, 0, -5), 1.5, matLeft);
-Sphere right(vec3(4, 0, -5), 1.5, matRight);
+Sphere ground(vec3(0, -1e5, 0), 1e5, matGround);
+Sphere backWall(vec3(0, 0, -1e5 - 15), 1e5, matBackWall);
+Sphere leftWall(vec3(-1e5 - 15, 0, 0), 1e5, matLeftWall);
+Sphere rightWall(vec3(1e5 + 15, 0, 0), 1e5, matRightWall);
+Sphere sphere(vec3(0, 2, 0), 2, matCenter);
+Sphere left(vec3(-4, 1.5, 0), 1.5, matLeft);
+Sphere right(vec3(4, 1.5, 0), 1.5, matRight);
 Interlist objects;
 
 int main() {
@@ -34,6 +40,7 @@ int main() {
     camera.spp = 100;
     camera.maxDepth = 5;
     objects.push_back(make_shared<Sphere>(ground));
+    // objects.push_back(make_shared<Sphere>(backWall));
     // objects.push_back(make_shared<Sphere>(leftWall));
     // objects.push_back(make_shared<Sphere>(rightWall));
     objects.push_back(make_shared<Sphere>(sphere));

@@ -73,10 +73,14 @@ mat4 Camera::viewport() {
 }
 
 void Camera::init() {
-    viewO = vec3(0, 0, 0);
-    viewportO = ZA * near;
-    viewportU = XA * width() / screen_w;
-    viewportV = -YA * height() / screen_h;
+    viewO = position.xyz();
+    viewportO = viewO - direction.xyz() * near;
+    viewportU = right.xyz() * width() / screen_w;
+    viewportV = -up.xyz() * height() / screen_h;
+    // viewportO = viewO + ZA * near;
+    // viewportU = XA * width() / screen_w;
+    // viewportV = -YA * height() / screen_h;
+
 }
 
 void Camera::render(Interlist &objects, TGAImage &image) {
@@ -112,7 +116,7 @@ inline double Camera::height() {
 Ray Camera::getRay(const int &i, const int &j) {
     vec3 pixPos = viewportO + (i - (screen_w >> 1) + 0.5)*viewportU + (j - (screen_h >> 1) + 0.5)*viewportV;
     pixPos += pixSampleSquare();
-    return Ray(viewO, pixPos);
+    return Ray(viewO, (pixPos - viewO).normalize());
 }
 
 vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
@@ -126,7 +130,7 @@ vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
     // vec3 c = rec.mat->color();
     // double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
     if (++depth > maxDepth) {
-        return ZERO_VEC3;
+        return rec.mat->color();
     }
 
     Ray scattered;
