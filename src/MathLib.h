@@ -660,6 +660,14 @@ static vec2 sampleUnitDisk() {
     return vec2(r*cos(phi), r*sin(phi));
 }
 
+static vec3 randVec3() {
+    return vec3(randDouble(), randDouble(), randDouble());
+}
+
+static vec3 randVec3(double min, double max) {
+    return vec3(randDouble(min, max), randDouble(min, max), randDouble(min, max));
+}
+
 // Generate random vector in sphere
 static vec3 randVecSphere() {
     // Assume that n is normalized

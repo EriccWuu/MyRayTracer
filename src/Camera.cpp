@@ -1,5 +1,4 @@
 #include "Camera.h"
-#include "stdio.h"
 
 /******************************************************************
 *                    Public Method Defination                     *
@@ -77,17 +76,19 @@ void Camera::init() {
     viewportO = viewO - direction.xyz() * near;
     viewportU = right.xyz() * width() / screen_w;
     viewportV = -up.xyz() * height() / screen_h;
-    // viewportO = viewO + ZA * near;
-    // viewportU = XA * width() / screen_w;
-    // viewportV = -YA * height() / screen_h;
 
+    double defcusRadius = -near*tan(deg2rad(defocusAngle / 2));
+    defocusDiskU = right.xyz() * defcusRadius;
+    defocusDiskV = -up.xyz() * defcusRadius;
 }
 
-void Camera::render(Interlist &objects, TGAImage &image) {
+void Camera::render(const Interlist &objects, TGAImage &image) {
     init();
+    ProgressBar bar(10);
 
     for (int j = 0; j < screen_h; j ++) {
-        fprintf(stderr, "\rRenderering (%d spp): %5.2f%%", spp, 100.*j/(screen_h-1));
+        std::string message = "Renderering (" + std::to_string(spp) + " spp)";
+        bar.update(static_cast<double>(j)/(screen_h-1), message);
         for (int i = 0; i < screen_w; i ++) {
             vec3 color(0, 0, 0);
             for (int k = 0; k < spp; k ++) {
@@ -114,9 +115,16 @@ inline double Camera::height() {
 }
 
 Ray Camera::getRay(const int &i, const int &j) {
+    vec2 pixSamp = pixSampleSquare();
     vec3 pixPos = viewportO + (i - (screen_w >> 1) + 0.5)*viewportU + (j - (screen_h >> 1) + 0.5)*viewportV;
-    pixPos += pixSampleSquare();
-    return Ray(viewO, (pixPos - viewO).normalize());
+    pixPos += viewportU*pixSamp.x + viewportV*pixSamp.y;
+    vec3 rayOrig = viewO;
+    if (defocusAngle > 0) {
+        vec2 defcusSamp = pixSampleDisk();
+        rayOrig += defocusDiskU*defcusSamp.x + defocusDiskV*defcusSamp.y;
+    }
+    vec3 rayDir = (pixPos - rayOrig).normalize();
+    return Ray(rayOrig, rayDir);
 }
 
 vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
@@ -129,9 +137,8 @@ vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
     }
     // vec3 c = rec.mat->color();
     // double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
-    if (++depth > maxDepth) {
+    if (++depth > maxDepth)
         return rec.mat->color();
-    }
 
     Ray scattered;
     vec3 attenuation;
@@ -139,17 +146,15 @@ vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
     return radiance(scattered, depth, obj).mult(attenuation);
 }
 
-inline vec3 Camera::pixSampleSquare() {
-    vec2 sample = sampleUnitSpuare();
-    double sx = sample.x - 0.5;
-    double sy = sample.y - 0.5;
-    return viewportU*sx + viewportV*sy;
+inline vec2 Camera::pixSampleSquare() {
+    vec2 sample = sampleUnitSpuare() - 0.5;
+    return sample;
 }
 
-inline vec3 Camera::pixSampleDisk(double radius) {
+inline vec2 Camera::pixSampleDisk(double radius) {
     vec2 sample = sampleUnitDisk();
     sample *= radius;
-    return viewportU*sample.x + viewportV*sample.y;
+    return sample;
 }
 
 bool Camera::intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec) {
@@ -157,10 +162,18 @@ bool Camera::intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, 
     bool hit_anything = false;
     
     for (const auto& obj: obj) {
-        if (obj->intersect(ray, rayt, tmp_rec)) {
-            hit_anything = true;
-            rayt.max = tmp_rec.t;
-            rec = tmp_rec;
+        if (obj->bbox.intersect(ray) && obj->intersect(ray, rayt, tmp_rec)) {
+                hit_anything = true;
+                rayt.max = tmp_rec.t;
+                rec = tmp_rec;
+        }
+
+        if (obj->bbox.intersect(ray)) {
+            if (obj->intersect(ray, rayt, tmp_rec)) {
+                hit_anything = true;
+                rayt.max = tmp_rec.t;
+                rec = tmp_rec;
+            }
         }
     }
 

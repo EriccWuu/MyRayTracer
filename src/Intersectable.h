@@ -10,10 +10,50 @@ using std::make_shared;
 using std::vector;
 
 /******************************************************************
+*                        Class Boundingbox                        *
+******************************************************************/
+class Boundingbox {
+public:
+    vec3 pmin, pmax;
+
+    Boundingbox(): pmin(ZERO_VEC3), pmax(ZERO_VEC3) {}
+    Boundingbox(vec3 pmin_, vec3 pmax_): 
+    pmin(pmin_), pmax(pmax_) {}
+
+    // Compute wheather a ray hitted the bounding box
+    bool intersect(const Ray &ray) {
+        float tmin = (pmin.x - ray.orig.x) / ray.dir.x;
+        float tmax = (pmax.x - ray.orig.x) / ray.dir.x;
+
+        if (tmin > tmax) std::swap(tmin, tmax);
+
+        float tymin = (pmin.y - ray.orig.y) / ray.dir.y;
+        float tymax = (pmax.y - ray.orig.y) / ray.dir.y;
+
+        if (tymin > tymax) std::swap(tymin, tymax);
+
+        if ((tmin > tymax) || (tymin > tmax)) return false;
+
+        if (tymin > tmin) tmin = tymin;
+        if (tymax < tmax) tmax = tymax;
+
+        float tzmin = (pmin.z - ray.orig.z) / ray.dir.z;
+        float tzmax = (pmax.z - ray.orig.z) / ray.dir.z;
+
+        if (tzmin > tzmax) std::swap(tzmin, tzmax);
+
+        if ((tmin > tzmax) || (tzmin > tmax)) return false;
+
+        return true;
+    }
+};
+
+/******************************************************************
 *                        Class Interval                           *
 ******************************************************************/
 class Intersectable {
 public:
+    Boundingbox bbox;
     virtual ~Intersectable() = default;
     // Compute wheather a ray hitted the object
     virtual bool intersect(const Ray &ray, Interval &rayt, InterRecord &rec) const = 0;
@@ -28,8 +68,17 @@ public:
     vec3 pos;  // position, emission, color of the sphere
     shared_ptr<Material> mat;
 
-    Sphere(vec3 p, double rad, shared_ptr<Material> mat): 
-    pos(p), radius(rad), mat(mat) {}
+    // Sphere(vec3 p, double rad, shared_ptr<Material> mat): 
+    // pos(p), radius(rad), mat(mat)) {}
+
+    Sphere(vec3 p, double rad, shared_ptr<Material> mat) {
+        pos = p;
+        radius = rad;
+        this->mat = mat;
+        vec3 pmin = p - (XA + YA + ZA)*rad;
+        vec3 pmax = p + (XA + YA + ZA)*rad;
+        bbox = Boundingbox(pmin, pmax);
+    }
 
     // Compute wheather a ray hitted the sphere
     bool intersect(const Ray &ray, Interval &rayt, InterRecord &rec) const override {

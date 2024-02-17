@@ -4,58 +4,126 @@
 #include "MathLib.h"
 #include "Camera.h"
 
-vec3 origin = {0, 0, 0};
 double aspectRatio = 16.0 / 9.0;
 int height = 450, width = (int)(height * aspectRatio);
-double fov = 60;
+double fov = 40;
 double near = -1/std::tan(PI/6), far = -50;
 vec3 up = {0, 1, 0};
-vec3 camPos = {0, 2, 5};
+vec3 camPos = {0, 2, 10};
 vec3 camDir = vec3(0, 0, -1);
-// vec3 camPos = {0, 2, 7};
-// vec3 camDir = origin - camPos;
 
-auto matGround = std::make_shared<Lambertian>(vec3(0.8, 0.8, 0.8));
-auto matBackWall = std::make_shared<Lambertian>(vec3(0.2, 0.2, 0.2));
-auto matLeftWall = std::make_shared<Lambertian>(vec3(0.75, 0.25, 0.25));
-auto matRightWall = std::make_shared<Lambertian>(vec3(0.25, 0.25, 0.75));
-auto matCenter = std::make_shared<Lambertian>(vec3(0.7, 0.3, 0.3));
-// auto matCenter = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.5);
-// auto matLeft  = std::make_shared<Matel>(vec3(0.8, 0.8, 0.8), 0);
-auto matLeft  = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.5);
-auto matRight = std::make_shared<Matel>(vec3(0.8, 0.6, 0.2), 0.3);
+void test() {
+    double aspectRatio = 16.0 / 9.0;
+    int height = 450, width = (int)(height * aspectRatio);
+    TGAImage image(width, height, TGAImage::RGB);
+    Interlist world;
 
-Sphere ground(vec3(0, -1e5, 0), 1e5, matGround);
-Sphere backWall(vec3(0, 0, -1e5 - 15), 1e5, matBackWall);
-Sphere leftWall(vec3(-1e5 - 15, 0, 0), 1e5, matLeftWall);
-Sphere rightWall(vec3(1e5 + 15, 0, 0), 1e5, matRightWall);
-Sphere sphere(vec3(0, 2, 0), 2, matCenter);
-Sphere left(vec3(-4, 1.5, 0), 1.5, matLeft);
-Sphere right(vec3(4, 1.5, 0), 1.5, matRight);
-Interlist objects;
+    auto ground_material = make_shared<Lambertian>(vec3(0.5, 0.5, 0.5));
+    world.push_back(make_shared<Sphere>(vec3(0,-1e3,0), 1e3, ground_material));
+
+    for (int a = -11; a < 11; a++) {
+        for (int b = -11; b < 11; b++) {
+            auto choose_mat = randDouble();
+            vec3 center(a + 0.9*randDouble(), 0.2, b + 0.9*randDouble());
+
+            if ((center - vec3(4, 0.2, 0)).norm() > 0.9) {
+                shared_ptr<Material> sphere_material;
+
+                if (choose_mat < 0.8) {
+                    // diffuse
+                    auto albedo = randVec3();
+                    sphere_material = make_shared<Lambertian>(albedo);
+                    world.push_back(make_shared<Sphere>(center, 0.2, sphere_material));
+                } else if (choose_mat < 0.95) {
+                    // metal
+                    auto albedo = randVec3(0.5, 1);
+                    auto fuzz = randDouble(0, 0.5);
+                    sphere_material = make_shared<Metal>(albedo, fuzz);
+                    world.push_back(make_shared<Sphere>(center, 0.2, sphere_material));
+                } else {
+                    // glass
+                    sphere_material = make_shared<Dielectric>(vec3(1, 1, 1), 1.5);
+                    world.push_back(make_shared<Sphere>(center, 0.2, sphere_material));
+                }
+            }
+        }
+    }
+
+    auto material1 = std::make_shared<Dielectric>(vec3(1, 1, 1), 1.5);
+    world.push_back(std::make_shared<Sphere>(vec3(0, 1, 0), 1.0, material1));
+
+    auto material2 = std::make_shared<Lambertian>(vec3(0.4, 0.2, 0.1));
+    world.push_back(std::make_shared<Sphere>(vec3(-4, 1, 0), 1.0, material2));
+
+    auto material3 = std::make_shared<Metal>(vec3(0.7, 0.6, 0.5), 0.0);
+    world.push_back(std::make_shared<Sphere>(vec3(4, 1, 0), 1.0, material3));
+
+    double fov     = 30;
+    vec3 position  = vec3(13,2,3);
+    vec3 direction = ZERO_VEC3 - position;
+    vec3 up        = vec3(0,1,0);
+
+    Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
+
+    cam.spp         = 100;
+    cam.maxDepth    = 5;
+    cam.defocusAngle = 0;
+    cam.near    = -0.5;
+
+    cam.render(world, image);
+
+    image.write_tga_file("result1.tga");
+}
 
 int main() {
-    TGAImage image(width, height, TGAImage::RGB);
-    Camera camera(camPos, camDir, up, height, aspectRatio, fov, near, far);
-    camera.spp = 100;
-    camera.maxDepth = 5;
-    objects.push_back(make_shared<Sphere>(ground));
-    // objects.push_back(make_shared<Sphere>(backWall));
-    // objects.push_back(make_shared<Sphere>(leftWall));
-    // objects.push_back(make_shared<Sphere>(rightWall));
-    objects.push_back(make_shared<Sphere>(sphere));
-    objects.push_back(make_shared<Sphere>(left));
-    objects.push_back(make_shared<Sphere>(right));
+    // TGAImage image(width, height, TGAImage::RGB);
+    // Camera camera(camPos, camDir, up, height, aspectRatio, fov, near, far);
+    // camera.spp = 100;
+    // camera.maxDepth = 5;
+    // camera.defocusAngle = 0;
+
+    // auto matGround = std::make_shared<Lambertian>(vec3(0.8, 0.8, 0.8));
+    // auto matBackWall = std::make_shared<Lambertian>(vec3(0.2, 0.2, 0.2));
+    // auto matLeftWall = std::make_shared<Lambertian>(vec3(0.75, 0.25, 0.25));
+    // auto matRightWall = std::make_shared<Lambertian>(vec3(0.25, 0.25, 0.75));
+    // auto matCenter = std::make_shared<Lambertian>(vec3(0.7, 0.3, 0.3));
+    // // auto matCenter = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.5);
+    // auto matLeft  = std::make_shared<Metal>(vec3(0.8, 0.8, 0.8), 0);
+    // // auto matLeft  = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.5);
+    // auto matRight = std::make_shared<Metal>(vec3(0.8, 0.6, 0.2), 0.3);
+
+    // Sphere ground(vec3(0, -1e5, 0), 1e5, matGround);
+    // Sphere backWall(vec3(0, 0, -1e5 - 15), 1e5, matBackWall);
+    // Sphere leftWall(vec3(-1e5 - 15, 0, 0), 1e5, matLeftWall);
+    // Sphere rightWall(vec3(1e5 + 15, 0, 0), 1e5, matRightWall);
+    // Sphere sphere(vec3(0, 2, 0), 2, matCenter);
+    // Sphere left(vec3(-4, 1.5, 0), 1.5, matLeft);
+    // Sphere right(vec3(4, 1.5, 0), 1.5, matRight);
+    // Interlist objects;
+
+    // objects.push_back(make_shared<Sphere>(ground));
+    // // objects.push_back(make_shared<Sphere>(backWall));
+    // // objects.push_back(make_shared<Sphere>(leftWall));
+    // // objects.push_back(make_shared<Sphere>(rightWall));
+    // objects.push_back(make_shared<Sphere>(sphere));
+    // objects.push_back(make_shared<Sphere>(left));
+    // objects.push_back(make_shared<Sphere>(right));
+
+    // auto start_time = std::chrono::high_resolution_clock::now();
+
+    // camera.render(objects, image);
+
+    // auto end_time = std::chrono::high_resolution_clock::now();
+    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // std::cout << "Time cost: " << duration.count() << " ms" << std::endl;
+
+    // image.write_tga_file("result.tga");
 
     auto start_time = std::chrono::high_resolution_clock::now();
-
-    camera.render(objects, image);
-
+    test();
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << "Time cost: " << duration.count() << " ms" << std::endl;
-
-    image.write_tga_file("result.tga");
 
     return 0;
 }

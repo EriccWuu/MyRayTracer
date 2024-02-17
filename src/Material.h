@@ -47,10 +47,10 @@ private:
     vec3 albedo;
 };
 
-class Matel: public Material {
+class Metal: public Material {
 public:
     // matel(const vec3 &a, double f): albedo(a), fuzzy(clamp(f)) {}
-    Matel(const vec3 &a, double f) { albedo = a, fuzzy = clamp(f); }
+    Metal(const vec3 &a, double f) { albedo = a, fuzzy = clamp(f); }
     bool scatter(const Ray &rayin, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         vec3 n = rec.inward ? rec.normal : -rec.normal;
         vec3 reflectdir = reflect(rayin.dir, n) + fuzzy*randVecSemisphere(n); // reflect direction
