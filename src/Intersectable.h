@@ -103,6 +103,7 @@ public:
         rec.normal = (rec.p - pos) / radius;
         rec.inward = (ray.dir * rec.normal < 0);
         rec.mat = mat;
+
         return true;
     }
 };

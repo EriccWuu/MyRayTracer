@@ -85,12 +85,15 @@ void Camera::init() {
 void Camera::render(const Interlist &objects, TGAImage &image) {
     init();
     ProgressBar bar(10);
+    vec3 color;
 
+#pragma omp parallel for schedule(dynamic, 1) private(color)       // OpenMP
     for (int j = 0; j < screen_h; j ++) {
         std::string message = "Renderering (" + std::to_string(spp) + " spp)";
         bar.update(static_cast<double>(j)/(screen_h-1), message);
+        std::vector<vec3> line;
         for (int i = 0; i < screen_w; i ++) {
-            vec3 color(0, 0, 0);
+            color = ZERO_VEC3;
             for (int k = 0; k < spp; k ++) {
                 Ray ray = getRay(i, j);
                 color += radiance(ray, 0, objects);
@@ -100,7 +103,6 @@ void Camera::render(const Interlist &objects, TGAImage &image) {
             image.set(i, j, TGAColor(255*color));
         }
     }
-    std::cout << '\n';
 }
 
 /******************************************************************
@@ -132,22 +134,34 @@ vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
 
     // Return if no intersection
     if (!intersect_all(obj, r, Interval(0.001, INF), rec)) {
-        double a = 0.5*(r.direction().normalize().y + 1.0);
-        return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
+        // double a = 0.5*(r.dir.y + 1.0);
+        // return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
+        return ZERO_VEC3;
     }
-    // vec3 c = rec.mat->color();
-    // double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
-    if (++depth > maxDepth)
-        return rec.mat->color();
 
     Ray scattered;
     vec3 attenuation;
-    rec.mat->scatter(r, rec, scattered, attenuation);
-    return radiance(scattered, depth, obj).mult(attenuation);
+    vec3 c = rec.mat->color();
+    vec3 e = rec.mat->emit();
+    double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
+
+    if (++depth > maxDepth) {
+        if (p > randDouble()) c /= p;
+        else return e;
+    }
+
+    if (!rec.mat->scatter(r, rec, scattered, attenuation))
+        return e;
+
+    return e + c.mult(radiance(scattered, depth, obj));
 }
 
 inline vec2 Camera::pixSampleSquare() {
-    vec2 sample = sampleUnitSpuare() - 0.5;
+    // vec2 sample = sampleUnitSpuare() - 0.5;
+    vec2 sample = 2.0*sampleUnitSpuare();
+    // Tant filtering
+    sample.x = sample.x < 1.0 ? sqrt(sample.x) - 1 : 1 - sqrt(sample.x);
+    sample.y = sample.y < 1.0 ? sqrt(sample.y) - 1 : 1 - sqrt(sample.y);
     return sample;
 }
 
@@ -160,23 +174,13 @@ inline vec2 Camera::pixSampleDisk(double radius) {
 bool Camera::intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec) {
     InterRecord tmp_rec;
     bool hit_anything = false;
-    
     for (const auto& obj: obj) {
         if (obj->bbox.intersect(ray) && obj->intersect(ray, rayt, tmp_rec)) {
-                hit_anything = true;
-                rayt.max = tmp_rec.t;
-                rec = tmp_rec;
-        }
-
-        if (obj->bbox.intersect(ray)) {
-            if (obj->intersect(ray, rayt, tmp_rec)) {
-                hit_anything = true;
-                rayt.max = tmp_rec.t;
-                rec = tmp_rec;
-            }
+            hit_anything = true;
+            rayt.max = tmp_rec.t;
+            rec = tmp_rec;
         }
     }
-
     return hit_anything;
 }
 

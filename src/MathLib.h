@@ -603,8 +603,8 @@ inline vec4 operator* (const mat4& m, const vec4& v) {
 const vec3 XA = {1, 0, 0};
 const vec3 YA = {0, 1, 0};
 const vec3 ZA = {0, 0, 1};
+const vec3 ONE_VEC3 = {1, 1, 1};
 const vec3 ZERO_VEC3 = {0, 0, 0};
-const vec3 E3 = {1, 1, 1};
 const mat3 E33 = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
 const mat4 E44 = {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 
@@ -697,10 +697,12 @@ inline vec3 reflect(const vec3& v, const vec3& n) {
 
 // Compute Refract Ray
 inline vec3 refract(const vec3& rin, const vec3& n, double etai_over_etat) {
-    double cos_theta = fmin((-rin * n) , 1.0);
-    vec3 r_out_perp =  etai_over_etat * (rin + cos_theta*n);
-    vec3 r_out_para = -sqrt(fabs(1.0 - r_out_perp.norm())) * n;
-    return (r_out_perp + r_out_para).normalize();
+    double cos_theta1 = rin * n;
+    double cos2_theta2 = 1 - etai_over_etat*etai_over_etat*(1 - cos_theta1*cos_theta1);
+    if (cos2_theta2 < 0) return reflect(rin, n);    // Total reflection
+    vec3 rout_perp =  etai_over_etat * (rin - cos_theta1*n);
+    vec3 rout_para = -n * sqrt(cos2_theta2);
+    return (rout_perp + rout_para).normalize();
 }
 
 inline mat4 scale(double s) {

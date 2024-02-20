@@ -14,8 +14,6 @@ enum ReflType {
 
 class Material {
 public:
-    // vec3 albedo;
-
     virtual ~Material() = default;
     virtual bool scatter(
         const Ray &rayIn,
@@ -23,13 +21,16 @@ public:
         Ray &scattered,
         vec3 &attenuation
     ) const = 0;
+    virtual vec3 emit() const {
+        return ZERO_VEC3;
+    }
     virtual vec3 color() const = 0;
 };
 
 class Lambertian: public Material {
 public:
-    // Lambertian(const vec3 &a): albedo(a) {}
-    Lambertian(const vec3 &a) { albedo = a; }
+    Lambertian(const vec3 &a, const vec3 &emi = ZERO_VEC3): albedo(a) {}
+    // Lambertian(const vec3 &a, const vec3 &emi = ZERO_VEC3): albedo(a) {}
     bool scatter(const Ray &rayIn, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         vec3 n = rec.inward ? rec.normal : -rec.normal;
         // vec3 scatterDir = randVecSemisphere(n);    // Random Reflection
@@ -49,8 +50,7 @@ private:
 
 class Metal: public Material {
 public:
-    // matel(const vec3 &a, double f): albedo(a), fuzzy(clamp(f)) {}
-    Metal(const vec3 &a, double f) { albedo = a, fuzzy = clamp(f); }
+    Metal(const vec3 &a, double f): albedo(a), fuzzy(clamp(f)) {}
     bool scatter(const Ray &rayin, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         vec3 n = rec.inward ? rec.normal : -rec.normal;
         vec3 reflectdir = reflect(rayin.dir, n) + fuzzy*randVecSemisphere(n); // reflect direction
@@ -69,18 +69,10 @@ class Dielectric: public Material {
 public:
     Dielectric(const vec3 &a, double ir): albedo(a), ir(ir)  {}
     bool scatter(const Ray &rayin, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
-
-        double refractRatio = rec.inward ? 1/ir : ir;
+        double refractRatio = rec.inward ? ir : 1/ir;
         vec3 n = rec.inward ? rec.normal : -rec.normal;
-        double cos_theta = fmin((-rayin.dir * n) , 1.0);
-        double sin_theta = sqrt(1.0 - cos_theta*cos_theta);
-
         vec3 dir;
         dir = refract(rayin.dir, n, refractRatio); // Refract
-        // if (refractRatio * sin_theta > 1.0)
-        //     dir = reflect(rayin.dir, n);    // Total Reflect
-        // else
-        //     dir = refract(rayin.dir, n, refractRatio); // Refract
         scattered = Ray(rec.p, dir);
         attenuation = albedo;
         return true;
@@ -90,5 +82,20 @@ public:
 private:
     vec3 albedo;
     double ir;
+};
+
+class Emission: public Material {
+public:
+    Emission(const vec3 &e):emission(e) {}
+    bool scatter(const Ray &rayIn, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
+        return false;
+    }
+    vec3 emit() const override {
+        return emission;
+    }
+    vec3 color() const override { return emission; }
+
+private:
+    vec3 emission;
 };
 #endif
