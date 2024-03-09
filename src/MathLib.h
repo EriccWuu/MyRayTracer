@@ -10,9 +10,9 @@
 #include <iostream>
 #include <algorithm>
 
-const double INF = std::numeric_limits<double>::infinity();
-const double EPS = std::numeric_limits<double>::epsilon();
-const double PI  = 3.141592653589793115997963468544185161590576171875;
+static const double INF = std::numeric_limits<double>::infinity();
+static const double EPS = std::numeric_limits<double>::epsilon();
+static const double PI  = 3.141592653589793115997963468544185161590576171875;
 
 /********************************************************************************
 *                               Vector Defination                               *
@@ -606,13 +606,13 @@ inline vec4 operator* (const mat4& m, const vec4& v) {
 }
 
 // Const value defination
-const vec3 XA = {1, 0, 0};
-const vec3 YA = {0, 1, 0};
-const vec3 ZA = {0, 0, 1};
-const vec3 ONE_VEC3 = {1, 1, 1};
-const vec3 ZERO_VEC3 = {0, 0, 0};
-const mat3 E33 = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
-const mat4 E44 = {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+static const vec3 XA = {1, 0, 0};
+static const vec3 YA = {0, 1, 0};
+static const vec3 ZA = {0, 0, 1};
+static const vec3 ONE_VEC3 = {1, 1, 1};
+static const vec3 ZERO_VEC3 = {0, 0, 0};
+static const mat3 E33 = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
+static const mat4 E44 = {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
 
 /********************************************************************************
 *                                Utility Methods                                *

@@ -39,11 +39,9 @@ private:
     inline double width();
     inline double height();
     Ray  getRay(const int &i, const int &j);
-    vec3 radiance(const Ray &r, int depth, const Interlist &obj);
     vec3 radiance(const Ray &r, int depth, const BVHNode &obj);
     inline vec2 pixSampleSquare();
     inline vec2 pixSampleDisk(double radius = 1.0);
-    bool intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec);
 };
 
 #endif

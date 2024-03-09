@@ -9,9 +9,11 @@ void test() {
     double aspectRatio = 16.0 / 9.0;
     int height = 675, width = (int)(height * aspectRatio);
     TGAImage image(width, height, TGAImage::RGB);
-    Interlist world;
+    std::vector<shared_ptr<Intersectable>> world;
 
-    auto ground_material = make_shared<Lambertian>(vec3(0.5, 0.5, 0.5));
+    // auto ground_material = make_shared<Lambertian>(vec3(0.5, 0.5, 0.5));
+    auto checker = make_shared<SolidColor>(vec3(0.5, 0.5, 0.5));
+    auto ground_material = make_shared<Lambertian>(checker);
     world.push_back(make_shared<Sphere>(vec3(0,-1e3,0), 1e3, ground_material));
 
     for (int a = -11; a < 11; a++) {
@@ -112,7 +114,7 @@ void test1() {
     Sphere grassBoll(vec3(50, 20, -20), 20, matGrass);
     Sphere right1(vec3(50, 5, -40), 5, matDiffuse);
 
-    Interlist objects;
+    std::vector<shared_ptr<Intersectable>> objects;
     objects.push_back(make_shared<Sphere>(ground));
     objects.push_back(make_shared<Sphere>(ceil));
     objects.push_back(make_shared<Sphere>(backWall));
@@ -174,7 +176,7 @@ void test2() {
     Sphere grassBoll(vec3(0, 20, -20), 20, matGrass);
     Sphere right1(vec3(50, 5, -40), 5, matDiffuse);
 
-    Interlist objects;
+    std::vector<shared_ptr<Intersectable>> objects;
     objects.push_back(make_shared<Sphere>(ground));
     // objects.push_back(make_shared<Sphere>(ceil));
     // objects.push_back(make_shared<Sphere>(backWall));
@@ -195,10 +197,44 @@ void test2() {
     image.write_tga_file("result.tga");
 }
 
+void earth() {
+    double aspectRatio = 16.0 / 9.0;
+    int height = 675, width = (int)(height * aspectRatio);
+    TGAImage image(width, height, TGAImage::RGB);
+    TGAImage earthTexture;
+    earthTexture.read_tga_file("assets/earthmap.tga");
+
+    std::vector<shared_ptr<Intersectable>> world;
+
+    auto tex = make_shared<ImageTexture>(earthTexture);
+    auto ground_material = make_shared<Lambertian>(tex);
+    world.push_back(make_shared<Sphere>(vec3(0, 0, 0), 3, ground_material));
+
+    double fov     = 30;
+    double near = -0.5, far = -50;
+    vec3 position  = vec3(13,2,3);
+    vec3 direction = ZERO_VEC3 - position;
+    vec3 up        = vec3(0,1,0);
+
+    Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
+
+    cam.spp         = 10;
+    cam.maxDepth    = 10;
+    cam.defocusAngle = 0;
+    cam.near    = -0.5;
+
+    std::sort(world.begin(), world.begin() + world.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
+
+    BVHNode world_(world, 0, world.size());
+    cam.render(world_, image);
+
+    image.write_tga_file("result.tga");
+}
+
 int main() {
 
     auto start_time = std::chrono::high_resolution_clock::now();
-    test1();
+    earth();
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << "\nTime cost: " << duration.count() << " ms" << std::endl;

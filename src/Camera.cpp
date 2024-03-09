@@ -171,5 +171,5 @@ vec3 Camera::radiance(const Ray &r, int depth, const BVHNode &objects) {
     if (!rec.mat->scatter(r, rec, scattered, attenuation))
         return e;
 
-    return e + c.mult(radiance(scattered, depth, objects));
+    return e + attenuation.mult(radiance(scattered, depth, objects));
 }

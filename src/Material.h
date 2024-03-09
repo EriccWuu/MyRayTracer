@@ -2,6 +2,7 @@
 #define __MATERIAL_H__
 
 #include "MathLib.h"
+#include "Texture.h"
 #include "Ray.h"
 
 class Ray;
@@ -29,19 +30,19 @@ public:
 
 class Lambertian: public Material {
 public:
-    Lambertian(const vec3 &a, const vec3 &emi = ZERO_VEC3): albedo(a) {}
-    // Lambertian(const vec3 &a, const vec3 &emi = ZERO_VEC3): albedo(a) {}
+    Lambertian(const vec3 &a): albedo(std::make_shared<SolidColor>(a)) {}
+    Lambertian(shared_ptr<Texture> a): albedo(a) {}
     bool scatter(const Ray &rayIn, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         vec3 n = rec.inward ? rec.normal : -rec.normal;
         vec3 scatterDir = randVecSemisphere(n);    // Lambertian Reflection
         scattered = Ray(rec.p, scatterDir);
-        attenuation = albedo;
+        attenuation = albedo->value(rec.uv.x, rec.uv.y, rec.p);
         return true;
     }
-    vec3 color() const override { return albedo; }
+    vec3 color() const override { return albedo->value(0, 0, vec3(1, 0, 0)); }
 
 private:
-    vec3 albedo;
+    shared_ptr<Texture> albedo;
 };
 
 class Metal: public Material {

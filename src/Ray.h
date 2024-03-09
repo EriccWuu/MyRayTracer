@@ -31,6 +31,7 @@ public:
     vec3 p;         // Ray position at orig + t*dir
     vec3 normal;    // Outward normal of intersectial face
     double t;       // Transmit time
+    vec2 uv;
     bool inward;    // Wheather the ray is going into objects
     shared_ptr<Material> mat;
 

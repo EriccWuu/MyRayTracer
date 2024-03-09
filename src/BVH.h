@@ -10,7 +10,6 @@ public:
         size_t n =  end - start;
         if (n == 1) {
             left = right = ordered_obj[start];
-            right = ordered_obj[start+1];
             // std::cout << start << '\n';
         }
         else if (n == 2) {

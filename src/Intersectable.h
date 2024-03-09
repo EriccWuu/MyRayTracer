@@ -74,43 +74,6 @@ static bool compare(const shared_ptr<Intersectable> &a, const shared_ptr<Interse
 }
 
 /******************************************************************
-*                        Class InterList                          *
-******************************************************************/
-class InterList: Intersectable {
-public:
-    std::vector<shared_ptr<Intersectable>> objects;
-
-    InterList() {};
-    InterList(shared_ptr<Intersectable> object) { add(object); }
-
-    void clear() { objects.clear(); }
-
-    void add(shared_ptr<Intersectable> object) {
-        objects.push_back(object); 
-        bbox = BoundingBox(bbox, object->bbox);
-    }
-    
-    // Compute wheather a ray hitted the object
-    bool intersect(const Ray &ray, Interval rayt, InterRecord &rec) const override {
-        InterRecord tmp_rec;
-        bool hit_anything = false;
-        for (const auto& obj: objects) {
-            if (obj->bbox.intersect(ray) && obj->intersect(ray, rayt, tmp_rec)) {
-                hit_anything = true;
-                rayt.max = tmp_rec.t;
-                rec = tmp_rec;
-            }
-        }
-        return hit_anything;
-    }
-
-    BoundingBox boundingBox() const override { return bbox; }
-
-private:
-    BoundingBox bbox;
-};
-
-/******************************************************************
 *                        Class Sphere                             *
 ******************************************************************/
 class Sphere: public Intersectable {
@@ -130,6 +93,12 @@ public:
         vec3 pmin = pos - (XA + YA + ZA)*radius;
         vec3 pmax = pos + (XA + YA + ZA)*radius;
         return BoundingBox(pmin, pmax);
+    }
+
+    static vec2 uv(const vec3 &p) {
+        double theta = acos(-p.y);
+        double phi = atan2(-p.z, p.x) + PI;
+        return vec2(phi / 2 / PI, theta / PI);
     }
 
     // Compute wheather a ray hitted the sphere
@@ -153,6 +122,7 @@ public:
         rec.t = t;
         rec.p = ray.at(t);
         rec.normal = (rec.p - pos) / radius;
+        rec.uv = uv(rec.normal);
         rec.inward = (ray.dir * rec.normal < 0);
         rec.mat = mat;
 
