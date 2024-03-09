@@ -29,7 +29,7 @@ public:
     mat4 projection();
     mat4 viewport();
     void init();
-    void render(const Interlist &objects, TGAImage &image);
+    void render(const BVHNode &objects, TGAImage &image);
 
 private:
     vec3 viewO;
@@ -40,6 +40,7 @@ private:
     inline double height();
     Ray  getRay(const int &i, const int &j);
     vec3 radiance(const Ray &r, int depth, const Interlist &obj);
+    vec3 radiance(const Ray &r, int depth, const BVHNode &obj);
     inline vec2 pixSampleSquare();
     inline vec2 pixSampleDisk(double radius = 1.0);
     bool intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec);

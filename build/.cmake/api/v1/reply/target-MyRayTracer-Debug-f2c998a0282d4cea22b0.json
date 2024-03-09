@@ -38,10 +38,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -O3 -g"
-				},
-				{
-					"fragment" : "-std=gnu++20"
+					"fragment" : " -O3 -g -std=gnu++20"
 				}
 			],
 			"language" : "CXX",
@@ -55,9 +52,9 @@
 			},
 			"sourceIndexes" : 
 			[
-				7,
 				8,
-				9
+				9,
+				10
 			]
 		}
 	],
@@ -100,21 +97,27 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7
 			]
 		},
 		{
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				7,
 				8,
-				9
+				9,
+				10
 			]
 		}
 	],
 	"sources" : 
 	[
+		{
+			"backtrace" : 1,
+			"path" : "src/BVH.h",
+			"sourceGroupIndex" : 0
+		},
 		{
 			"backtrace" : 1,
 			"path" : "src/Camera.h",

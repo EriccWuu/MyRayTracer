@@ -82,7 +82,7 @@ void Camera::init() {
     defocusDiskV = -up.xyz() * defcusRadius;
 }
 
-void Camera::render(const Interlist &objects, TGAImage &image) {
+void Camera::render(const BVHNode &objects, TGAImage &image) {
     init();
     ProgressBar bar(10);
     vec3 color;
@@ -116,46 +116,6 @@ inline double Camera::height() {
     return -2*near*std::tan(deg2rad(fov/2));
 }
 
-Ray Camera::getRay(const int &i, const int &j) {
-    vec2 pixSamp = pixSampleSquare();
-    vec3 pixPos = viewportO + (i - (screen_w >> 1) + 0.5)*viewportU + (j - (screen_h >> 1) + 0.5)*viewportV;
-    pixPos += viewportU*pixSamp.x + viewportV*pixSamp.y;
-    vec3 rayOrig = viewO;
-    if (defocusAngle > 0) {
-        vec2 defcusSamp = pixSampleDisk();
-        rayOrig += defocusDiskU*defcusSamp.x + defocusDiskV*defcusSamp.y;
-    }
-    vec3 rayDir = (pixPos - rayOrig).normalize();
-    return Ray(rayOrig, rayDir);
-}
-
-vec3 Camera::radiance(const Ray &r, int depth, const Interlist &obj) {
-    InterRecord rec;
-
-    // Return if no intersection
-    if (!intersect_all(obj, r, Interval(0.001, INF), rec)) {
-        // double a = 0.5*(r.dir.y + 1.0);
-        // return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
-        return ZERO_VEC3;
-    }
-
-    Ray scattered;
-    vec3 attenuation;
-    vec3 c = rec.mat->color();
-    vec3 e = rec.mat->emit();
-    double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
-
-    if (++depth > maxDepth) {
-        if (p > randDouble()) c /= p;
-        else return e;
-    }
-
-    if (!rec.mat->scatter(r, rec, scattered, attenuation))
-        return e;
-
-    return e + c.mult(radiance(scattered, depth, obj));
-}
-
 inline vec2 Camera::pixSampleSquare() {
     // vec2 sample = sampleUnitSpuare() - 0.5;
     vec2 sample = 2.0*sampleUnitSpuare();
@@ -171,16 +131,45 @@ inline vec2 Camera::pixSampleDisk(double radius) {
     return sample;
 }
 
-bool Camera::intersect_all(const Interlist &obj, const Ray &ray, Interval rayt, InterRecord &rec) {
-    InterRecord tmp_rec;
-    bool hit_anything = false;
-    for (const auto& obj: obj) {
-        if (obj->bbox.intersect(ray) && obj->intersect(ray, rayt, tmp_rec)) {
-            hit_anything = true;
-            rayt.max = tmp_rec.t;
-            rec = tmp_rec;
-        }
+Ray Camera::getRay(const int &i, const int &j) {
+    vec2 pixSamp = pixSampleSquare();
+    vec3 pixPos = viewportO + (i - (screen_w >> 1) + 0.5)*viewportU + (j - (screen_h >> 1) + 0.5)*viewportV;
+    pixPos += viewportU*pixSamp.x + viewportV*pixSamp.y;
+    vec3 rayOrig = viewO;
+    if (defocusAngle > 0) {
+        vec2 defcusSamp = pixSampleDisk();
+        rayOrig += defocusDiskU*defcusSamp.x + defocusDiskV*defcusSamp.y;
     }
-    return hit_anything;
+    vec3 rayDir = (pixPos - rayOrig).normalize();
+    return Ray(rayOrig, rayDir);
 }
 
+vec3 Camera::radiance(const Ray &r, int depth, const BVHNode &objects) {
+    InterRecord rec;
+    Interval rayt(1e-3, INF);
+
+    // Return if no intersection
+    if (!objects.intersect(r, rayt, rec)) {
+        double a = 0.5*(r.dir.y + 1.0);
+        return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
+    }
+
+    // if (!objects.intersect(r, rayt, rec))
+    //     return ZERO_VEC3;
+
+    Ray scattered;
+    vec3 attenuation;
+    vec3 c = rec.mat->color();
+    vec3 e = rec.mat->emit();
+    double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
+
+    if (++depth > maxDepth) {
+        if (p > randDouble()) c /= p;
+        else return e;
+    }
+
+    if (!rec.mat->scatter(r, rec, scattered, attenuation))
+        return e;
+
+    return e + c.mult(radiance(scattered, depth, objects));
+}

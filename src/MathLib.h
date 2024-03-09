@@ -8,6 +8,7 @@
 #include <random>
 #include <cassert>
 #include <iostream>
+#include <algorithm>
 
 const double INF = std::numeric_limits<double>::infinity();
 const double EPS = std::numeric_limits<double>::epsilon();
@@ -189,6 +190,9 @@ template<> struct vec<3,double> {
         return *this;
     }
     inline vec& operator/=(double t) { return *this *= 1/t; }
+    inline bool operator<(const vec<3,double> &v) const {
+        return ((x < v.x) && (y < v.y) && (z < v.z));
+    }
 
     inline double norm2() const { return x*x + y*y + z*z; }
     inline double norm()  const { return sqrt(norm2()); }
@@ -242,6 +246,8 @@ inline double operator*(const vec<3,double> &u, const vec<3,double> &v) {
 inline vec<3,double> operator/(const vec<3,double> &v, const double &k) {
     return (1/k) * v;
 }
+
+
 
 // vector compnent-wise product
 inline vec<3,double> mult(const vec<3,double> &v1, const vec<3,double> &v2) {
@@ -671,11 +677,14 @@ static vec3 randVec3(double min, double max) {
 // Generate random vector in sphere
 static vec3 randVecSphere() {
     // Assume that n is normalized
-    double phi = 2*PI*randDouble(), r = randDouble(-1, 1);
-    double a, b;
-    if (r > 0) { a = sqrt(1 - r), b = sqrt(r); }
-    else {a = sqrt(1 + r), b = sqrt(-r); }
-    return vec3(cos(phi)*a, sin(phi)*a, b);
+    // double phi = 2*PI*randDouble(), r = randDouble(-1, 1);
+    // double a, b;
+    // if (r > 0) { a = sqrt(1 - r), b = sqrt(r); }
+    // else {a = sqrt(1 + r), b = sqrt(-r); }
+    // return vec3(cos(phi)*a, sin(phi)*a, b).normalize();
+    double phi = 2*PI*randDouble(), theta = PI*randDouble(-1, 1);
+    double a = cos(theta), b = sin(theta);
+    return vec3(cos(phi)*a, sin(phi)*a, b).normalize();
 }
 
 // Generate random vector in hemisphere
@@ -687,7 +696,7 @@ static vec3 randVecSemisphere(const vec3& n) {
     u = (u.norm() > EPS ? u : XA.cross(n)).normalize();
     // u = (u.norm() > EPS ? u : XA.cross(n));
     vec3 v = n.cross(u);
-    return (u*cos(phi)*a + v*sin(phi)*a + n*b);
+    return (u*cos(phi)*a + v*sin(phi)*a + n*b).normalize();
 }
 
 // Compute Reflect Ray

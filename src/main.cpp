@@ -1,6 +1,7 @@
 #include "iostream"
 #include "cmath"
 #include <chrono>
+#include "Utility.h"
 #include "MathLib.h"
 #include "Camera.h"
 
@@ -58,14 +59,17 @@ void test() {
 
     Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
 
-    cam.spp         = 500;
-    cam.maxDepth    = 50;
+    cam.spp         = 10;
+    cam.maxDepth    = 10;
     cam.defocusAngle = 0;
     cam.near    = -0.5;
 
-    cam.render(world, image);
+    std::sort(world.begin(), world.begin() + world.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
 
-    image.write_tga_file("test_result.tga");
+    BVHNode world_(world, 0, world.size());
+    cam.render(world_, image);
+
+    image.write_tga_file("result.tga");
 }
 
 void test1() {
@@ -76,12 +80,11 @@ void test1() {
     double a = 60;
     vec3 up = {0, 1, 0};
     vec3 camPos = {0, a, 2*a-1};
-    // vec3 camDir = vec3(0, 0, -1);
     vec3 camDir = vec3(0, a, 0) - camPos;
 
     TGAImage image(width, height, TGAImage::RGB);
     Camera camera(camPos, camDir, up, height, aspectRatio, fov, near, far);
-    camera.spp = 10;
+    camera.spp = 100;
     camera.maxDepth = 10;
     camera.defocusAngle = 0;
 
@@ -91,11 +94,10 @@ void test1() {
     auto matFrontWall = std::make_shared<Lambertian>(vec3(0, 0, 0));
     auto matLeftWall = std::make_shared<Lambertian>(vec3(0.75, 0.25, 0.25));
     auto matRightWall = std::make_shared<Lambertian>(vec3(0.25, 0.25, 0.75));
-    // auto matCenter = std::make_shared<Lambertian>(vec3(0.7, 0.3, 0.3));
+    auto matCenter = std::make_shared<Lambertian>(vec3(0.7, 0.3, 0.3));
     auto matLight = std::make_shared<Emission>(12*ONE_VEC3);
     auto matGrass = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.0/1.5);
     auto matMirror  = std::make_shared<Metal>(vec3(0.8, 0.8, 0.8), 0);
-    // auto matLeft  = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.0/1.5);
     auto matDiffuse = std::make_shared<Metal>(vec3(0.8, 0.6, 0.2), 0.3);
 
     Sphere ground(vec3(0, -1e5, 0), 1e5, matGround);
@@ -123,7 +125,72 @@ void test1() {
     objects.push_back(make_shared<Sphere>(diffuseBoll));
     // objects.push_back(make_shared<Sphere>(right1));
 
-    camera.render(objects, image);
+    std::sort(objects.begin(), objects.begin() + objects.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
+
+    BVHNode world(objects, 0, objects.size());
+    camera.render(world, image);
+
+    image.write_tga_file("result.tga");
+}
+
+void test2() {
+    double aspectRatio = 16.0 / 9.0;
+    int height = 450, width = (int)(height * aspectRatio);
+    double fov = 30;
+    double near = -1/std::tan(PI/6), far = -50;
+    double a = 20;
+    vec3 up = {0, 1, 0};
+    vec3 camPos = {0, a, 150};
+    // vec3 camDir = vec3(0, 0, -1);
+    vec3 camDir = vec3(0, a, 0) - camPos;
+
+    TGAImage image(width, height, TGAImage::RGB);
+    Camera camera(camPos, camDir, up, height, aspectRatio, fov, near, far);
+    camera.spp = 100;
+    camera.maxDepth = 10;
+    camera.defocusAngle = 0;
+
+    auto matGround = std::make_shared<Lambertian>(vec3(0.8, 0.8, 0.8));
+    auto matCeil = std::make_shared<Lambertian>(vec3(0.8, 0.8, 0.8));
+    auto matBackWall = std::make_shared<Lambertian>(vec3(0.8, 0.8, 0.8));
+    auto matFrontWall = std::make_shared<Lambertian>(vec3(0, 0, 0));
+    auto matLeftWall = std::make_shared<Lambertian>(vec3(0.75, 0.25, 0.25));
+    auto matRightWall = std::make_shared<Lambertian>(vec3(0.25, 0.25, 0.75));
+    auto matCenter = std::make_shared<Lambertian>(vec3(0.7, 0.3, 0.3));
+    auto matLight = std::make_shared<Emission>(12*ONE_VEC3);
+    auto matGrass = std::make_shared<Dielectric>(vec3(1.0, 1.0, 1.0), 1.0/1.5);
+    auto matMirror  = std::make_shared<Metal>(vec3(0.8, 0.8, 0.8), 0);
+    auto matDiffuse = std::make_shared<Metal>(vec3(0.8, 0.6, 0.2), 0.3);
+
+    Sphere ground(vec3(0, -1e5, 0), 1e5, matGround);
+    Sphere ceil(vec3(0, 1e5 + 2*a, 0), 1e5, matCeil);
+    Sphere backWall(vec3(0, 0, -1e5 - a), 1e5, matBackWall);
+    Sphere frontWall(vec3(0, 0, 1e5 + 2*a), 1e5, matFrontWall);
+    Sphere leftWall(vec3(-1e5 - 2*a, 0, 0), 1e5, matLeftWall);
+    Sphere rightWall(vec3(1e5 + 2*a, 0, 0), 1e5, matRightWall);
+    Sphere light(vec3(0, 2*a + 140, -a/4), 142, matLight);
+    Sphere metalBoll(vec3(-50, 20, -20), 20, matMirror);
+    Sphere diffuseBoll(vec3(50, 20, -20), 20, matDiffuse);
+    Sphere grassBoll(vec3(0, 20, -20), 20, matGrass);
+    Sphere right1(vec3(50, 5, -40), 5, matDiffuse);
+
+    Interlist objects;
+    objects.push_back(make_shared<Sphere>(ground));
+    // objects.push_back(make_shared<Sphere>(ceil));
+    // objects.push_back(make_shared<Sphere>(backWall));
+    // objects.push_back(make_shared<Sphere>(frontWall));
+    // objects.push_back(make_shared<Sphere>(leftWall));
+    // objects.push_back(make_shared<Sphere>(rightWall));
+    // objects.push_back(make_shared<Sphere>(light));
+    objects.push_back(make_shared<Sphere>(grassBoll));
+    objects.push_back(make_shared<Sphere>(metalBoll));
+    objects.push_back(make_shared<Sphere>(diffuseBoll));
+    // objects.push_back(make_shared<Sphere>(right1));
+
+    std::sort(objects.begin(), objects.begin() + objects.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
+
+    BVHNode world(objects, 0, objects.size());
+    camera.render(world, image);
 
     image.write_tga_file("result.tga");
 }
@@ -131,11 +198,10 @@ void test1() {
 int main() {
 
     auto start_time = std::chrono::high_resolution_clock::now();
-    // test();
     test1();
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    std::cout << "Time cost: " << duration.count() << " ms" << std::endl;
+    std::cout << "\nTime cost: " << duration.count() << " ms" << std::endl;
 
     return 0;
 }

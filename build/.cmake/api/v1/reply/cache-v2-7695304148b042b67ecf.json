@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "25"
+			"value" : "26"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "2"
+			"value" : "0"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -103,7 +103,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/Program/MSYS64/clang64/bin/cmake.exe"
+			"value" : "E:/Program/CMake/bin/cmake.exe"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -115,7 +115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/Program/MSYS64/clang64/bin/cpack.exe"
+			"value" : "E:/Program/CMake/bin/cpack.exe"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/Program/MSYS64/clang64/bin/ctest.exe"
+			"value" : "E:/Program/CMake/bin/ctest.exe"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -160,6 +160,22 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "E:/Program/MSYS64/clang64/bin/llvm-ar.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "`clang-scan-deps` dependency scanner"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/Program/MSYS64/clang64/bin/clang-scan-deps.exe"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_RANLIB",
@@ -306,6 +322,22 @@
 			"value" : "E:/Program/MSYS64/clang64/bin/llvm-ar.exe"
 		},
 		{
+			"name" : "CMAKE_C_COMPILER_CLANG_SCAN_DEPS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "`clang-scan-deps` dependency scanner"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/Program/MSYS64/clang64/bin/clang-scan-deps.exe"
+		},
+		{
 			"name" : "CMAKE_C_COMPILER_RANLIB",
 			"properties" : 
 			[
@@ -443,7 +475,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/Program/MSYS64/clang64/bin/ccmake.exe"
+			"value" : "E:/Program/CMake/bin/cmake-gui.exe"
 		},
 		{
 			"name" : "CMAKE_EXECUTABLE_FORMAT",
@@ -1027,7 +1059,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/Program/MSYS64/clang64/share/cmake"
+			"value" : "E:/Program/CMake/share/cmake-3.26"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",

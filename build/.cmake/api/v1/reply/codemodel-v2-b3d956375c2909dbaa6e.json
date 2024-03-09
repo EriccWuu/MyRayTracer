@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MyRayTracer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MyRayTracer-Debug-3b217402574601da2429.json",
+					"jsonFile" : "target-MyRayTracer-Debug-f2c998a0282d4cea22b0.json",
 					"name" : "MyRayTracer",
 					"projectIndex" : 0
 				}
@@ -55,6 +55,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 5
 	}
 }

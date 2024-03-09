@@ -33,11 +33,7 @@ public:
     // Lambertian(const vec3 &a, const vec3 &emi = ZERO_VEC3): albedo(a) {}
     bool scatter(const Ray &rayIn, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         vec3 n = rec.inward ? rec.normal : -rec.normal;
-        // vec3 scatterDir = randVecSemisphere(n);    // Random Reflection
-        vec3 scatterDir = n + randVecSphere();  // Lambertian Reflection
-        auto norm = scatterDir.norm();
-        if (norm < EPS) scatterDir = rec.normal;
-        else scatterDir /= norm;
+        vec3 scatterDir = randVecSemisphere(n);    // Lambertian Reflection
         scattered = Ray(rec.p, scatterDir);
         attenuation = albedo;
         return true;
