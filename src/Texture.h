@@ -3,6 +3,7 @@
 
 #include "MathLib.h"
 #include "TGAImage.h"
+#include "Perlin.h"
 
 class Texture {
 public:
@@ -38,6 +39,18 @@ public:
 
 private:
     TGAImage texture;
+};
+
+class NoiseTexture: public Texture {
+public:
+    NoiseTexture() {}
+
+    vec3 value(double u, double v, const vec3 &p) const override {
+        return noise.noise(p) * vec3(1, 1 , 1);
+    }
+
+private:
+    Perlin noise;
 };
 
 #endif

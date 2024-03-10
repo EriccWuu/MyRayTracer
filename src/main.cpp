@@ -206,9 +206,12 @@ void earth() {
 
     std::vector<shared_ptr<Intersectable>> world;
 
-    auto tex = make_shared<ImageTexture>(earthTexture);
-    auto ground_material = make_shared<Lambertian>(tex);
-    world.push_back(make_shared<Sphere>(vec3(0, 0, 0), 3, ground_material));
+    auto earthTex = make_shared<ImageTexture>(earthTexture);
+    auto earth_material = make_shared<Lambertian>(earthTex);
+    auto groundTex = make_shared<NoiseTexture>();
+    auto ground_material = make_shared<Lambertian>(groundTex);
+    world.push_back(make_shared<Sphere>(vec3(0, 3, 0), 3, earth_material));
+    world.push_back(make_shared<Sphere>(vec3(0, -1e3, 0), 1e3, ground_material));
 
     double fov     = 30;
     double near = -0.5, far = -50;

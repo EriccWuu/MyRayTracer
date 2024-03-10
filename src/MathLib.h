@@ -652,6 +652,11 @@ inline double randDouble(double min, double max) {
     return min + (max-min)*randDouble();
 }
 
+// Generate a random int in [min,max].
+inline double randInt(double min, double max) {
+    return static_cast<int>(randDouble(min, max+1));
+}
+
 // Sample in [0, 1]^2
 static vec2 sampleUnitSpuare() {
     double x = randDouble();

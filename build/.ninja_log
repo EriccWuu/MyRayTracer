@@ -60,3 +60,9 @@
 20	1123	7316786408050002	CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj	45ec0db4b4b1aadc
 24	2345	7316786420265543	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	5d2add18ce34beb5
 2346	2453	7316786421345920	MyRayTracer.exe	815016a17f805784
+70	4707	7317857510858720	CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj	45ec0db4b4b1aadc
+99	4744	7317857511285076	CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj	86b64253972d5c4b
+103	5943	7317857523220382	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	5d2add18ce34beb5
+5943	6111	7317857524930683	MyRayTracer.exe	815016a17f805784
+21	2389	7317857673230146	CMakeFiles/MyRayTracer.dir/src/main.cpp.obj	5d2add18ce34beb5
+2389	2511	7317857674463485	MyRayTracer.exe	815016a17f805784
