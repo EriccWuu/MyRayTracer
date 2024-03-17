@@ -15,9 +15,6 @@ using std::shared_ptr;
 using std::make_shared;
 using std::vector;
 
-// typedef std::vector<std::shared_ptr<Intersectable>> Interlist;
-typedef std::shared_ptr<Material> Matptr;
-
 class ProgressBar {
 public:
     explicit ProgressBar(int width) : width_(width) {}

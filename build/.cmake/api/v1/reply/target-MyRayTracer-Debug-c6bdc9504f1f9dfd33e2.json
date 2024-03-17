@@ -52,9 +52,9 @@
 			},
 			"sourceIndexes" : 
 			[
-				9,
 				10,
-				11
+				11,
+				12
 			]
 		}
 	],
@@ -99,16 +99,17 @@
 				5,
 				6,
 				7,
-				8
+				8,
+				9
 			]
 		},
 		{
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				9,
 				10,
-				11
+				11,
+				12
 			]
 		}
 	],
@@ -137,6 +138,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "src/MathLib.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/Perlin.h",
 			"sourceGroupIndex" : 0
 		},
 		{

@@ -206,16 +206,17 @@ void earth() {
 
     std::vector<shared_ptr<Intersectable>> world;
 
-    auto earthTex = make_shared<ImageTexture>(earthTexture);
+    // auto earthTex = make_shared<ImageTexture>(earthTexture);
+    auto earthTex = make_shared<NoiseTexture>(4);
     auto earth_material = make_shared<Lambertian>(earthTex);
-    auto groundTex = make_shared<NoiseTexture>();
+    auto groundTex = make_shared<NoiseTexture>(4);
     auto ground_material = make_shared<Lambertian>(groundTex);
     world.push_back(make_shared<Sphere>(vec3(0, 3, 0), 3, earth_material));
     world.push_back(make_shared<Sphere>(vec3(0, -1e3, 0), 1e3, ground_material));
 
     double fov     = 30;
     double near = -0.5, far = -50;
-    vec3 position  = vec3(13,2,3);
+    vec3 position  = vec3(0, 3, 10);
     vec3 direction = ZERO_VEC3 - position;
     vec3 up        = vec3(0,1,0);
 
@@ -234,10 +235,48 @@ void earth() {
     image.write_tga_file("result.tga");
 }
 
+void drawTriangle() {
+    double aspectRatio = 16.0 / 9.0;
+    int height = 675, width = (int)(height * aspectRatio);
+    TGAImage image(width, height, TGAImage::RGB);
+
+    std::vector<shared_ptr<Intersectable>> world;
+
+    auto noiseTex = make_shared<NoiseTexture>(4);
+    auto earth_material = make_shared<Lambertian>(vec3(1.0, 0.2, 0.2));
+    auto ground_material = make_shared<Lambertian>(noiseTex);
+
+    vec3 Q = {-2, -0.5, -3};
+    vec3 u = {0, 1, 0}, v = {0, 0, -1};
+    world.push_back(make_shared<Triangle>(Q, Q + u, Q + v, earth_material));
+    world.push_back(make_shared<Triangle>(Q + u, Q + v, Q + u + v, earth_material));
+    // world.push_back(make_shared<Triangle>(vec3(0, 0, -3), vec3(0, -1, -3), vec3(-1, 0, -3), earth_material));
+    // world.push_back(make_shared<Sphere>(vec3(0, -1e3, 0), 1e3, ground_material));
+
+    double fov     = 30;
+    double near = -0.5, far = -50;
+    vec3 position  = vec3(0, 0, 3);
+    vec3 direction = ZERO_VEC3 - position;
+    vec3 up        = vec3(0, 1, 0);
+
+    Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
+
+    cam.spp         = 10;
+    cam.maxDepth    = 10;
+    cam.defocusAngle = 0;
+
+    std::sort(world.begin(), world.begin() + world.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
+
+    BVHNode world_(world, 0, world.size());
+    cam.render(world_, image);
+
+    image.write_tga_file("result.tga");
+}
+
 int main() {
 
     auto start_time = std::chrono::high_resolution_clock::now();
-    earth();
+    drawTriangle();
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << "\nTime cost: " << duration.count() << " ms" << std::endl;

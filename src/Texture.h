@@ -44,13 +44,17 @@ private:
 class NoiseTexture: public Texture {
 public:
     NoiseTexture() {}
+    NoiseTexture(double sc): scale(sc) {}
 
     vec3 value(double u, double v, const vec3 &p) const override {
-        return noise.noise(p) * vec3(1, 1 , 1);
+        auto s = scale * p;
+        // return noise.turbulance(s) * ONE_VEC3;
+        return 0.5 * (1 + sin(s.z + 10*noise.turbulance(s))) * ONE_VEC3;
     }
 
 private:
     Perlin noise;
+    double scale;   // to tweaking the frequency
 };
 
 #endif
