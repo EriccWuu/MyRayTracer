@@ -148,14 +148,8 @@ vec3 Camera::radiance(const Ray &r, int depth, const BVHNode &objects) {
     InterRecord rec;
     Interval rayt(1e-3, INF);
 
-    // Return if no intersection
-    if (!objects.intersect(r, rayt, rec)) {
-        double a = 0.5*(r.dir.y + 1.0);
-        return ((1.0 - a)*vec3(1.0, 1.0, 1.0) + a*vec3(0.5,0.7,1.0));
-    }
-
-    // if (!objects.intersect(r, rayt, rec))
-    //     return ZERO_VEC3;
+    if (!objects.intersect(r, rayt, rec))
+        return ZERO_VEC3;
 
     Ray scattered;
     vec3 attenuation;
@@ -164,8 +158,9 @@ vec3 Camera::radiance(const Ray &r, int depth, const BVHNode &objects) {
     double p = c.x>c.y && c.x>c.z ? c.x : c.y>c.z ? c.y : c.z; // max refl
 
     if (++depth > maxDepth) {
-        if (p > randDouble()) c /= p;
-        else return e;
+        // if (p > randDouble()) c /= p;
+        // else return e;
+        return ZERO_VEC3;
     }
 
     if (!rec.mat->scatter(r, rec, scattered, attenuation))

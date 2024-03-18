@@ -8,11 +8,6 @@
 class Ray;
 struct InterRecord;
 
-// material types, used in radiance()
-enum ReflType { 
-    DIFF, SPEC, REFR
-};
-
 class Material {
 public:
     virtual ~Material() = default;
@@ -25,7 +20,9 @@ public:
     virtual vec3 emit() const {
         return ZERO_VEC3;
     }
-    virtual vec3 color() const = 0;
+    virtual vec3 color(double u=0, double v=0, const vec3 &p=ZERO_VEC3) const {
+        return ZERO_VEC3;
+    }
 };
 
 class Lambertian: public Material {
@@ -39,7 +36,9 @@ public:
         attenuation = albedo->value(rec.uv.x, rec.uv.y, rec.p);
         return true;
     }
-    vec3 color() const override { return albedo->value(0, 0, vec3(1, 0, 0)); }
+    vec3 color(double u=0, double v=0, const vec3 &p=ZERO_VEC3) const override {
+        return albedo->value(u, v, p);
+    }
 
 private:
     shared_ptr<Texture> albedo;
@@ -55,7 +54,7 @@ public:
         attenuation = albedo;
         return true;
     }
-    vec3 color() const override { return albedo; }
+    vec3 color(double u=0, double v=0, const vec3 &p=ZERO_VEC3) const override { return albedo; }
 
 private:
     vec3 albedo;
@@ -74,7 +73,7 @@ public:
         attenuation = albedo;
         return true;
     }
-    vec3 color() const override { return albedo; }
+    vec3 color(double u=0, double v=0, const vec3 &p=ZERO_VEC3) const override { return albedo; }
 
 private:
     vec3 albedo;
@@ -83,16 +82,16 @@ private:
 
 class Emission: public Material {
 public:
-    Emission(const vec3 &e):emission(e) {}
+    Emission(const vec3 &e):emission(std::make_shared<SolidColor>(e)) {}
     bool scatter(const Ray &rayIn, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         return false;
     }
     vec3 emit() const override {
-        return emission;
+        return emission->value(0, 0, ZERO_VEC3);
     }
-    vec3 color() const override { return emission; }
+    vec3 color(double u=0, double v=0, const vec3 &p=ZERO_VEC3) const override { return emission->value(u, v, p); }
 
 private:
-    vec3 emission;
+    shared_ptr<Texture> emission;
 };
 #endif

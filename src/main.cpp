@@ -235,33 +235,59 @@ void earth() {
     image.write_tga_file("result.tga");
 }
 
-void drawTriangle() {
-    double aspectRatio = 16.0 / 9.0;
-    int height = 675, width = (int)(height * aspectRatio);
+void cornellBox() {
+    double aspectRatio = 1.0;
+    int height = 600, width = (int)(height * aspectRatio);
     TGAImage image(width, height, TGAImage::RGB);
 
     std::vector<shared_ptr<Intersectable>> world;
 
-    auto noiseTex = make_shared<NoiseTexture>(4);
-    auto earth_material = make_shared<Lambertian>(vec3(1.0, 0.2, 0.2));
-    auto ground_material = make_shared<Lambertian>(noiseTex);
+    auto red_material = make_shared<Lambertian>(vec3(0.65, 0.05, 0.05));
+    auto white_material = make_shared<Lambertian>(vec3(0.73, 0.73, 0.73));
+    auto green_material = make_shared<Lambertian>(vec3(0.12, 0.45, 0.15));
+    auto light_material = make_shared<Emission>(ONE_VEC3 * 15);
+    auto sphere_material = make_shared<Lambertian>(vec3(1.0, 0.2, 0.2));
 
-    vec3 Q = {-2, -0.5, -3};
-    vec3 u = {0, 1, 0}, v = {0, 0, -1};
-    world.push_back(make_shared<Triangle>(Q, Q + u, Q + v, earth_material));
-    world.push_back(make_shared<Triangle>(Q + u, Q + v, Q + u + v, earth_material));
-    // world.push_back(make_shared<Triangle>(vec3(0, 0, -3), vec3(0, -1, -3), vec3(-1, 0, -3), earth_material));
-    // world.push_back(make_shared<Sphere>(vec3(0, -1e3, 0), 1e3, ground_material));
+    double a = 6;
+    vec3 Q;
+    vec3 u = {1, 0, 0}, v = {0, 1, 0}, w = {0, 0, 1};
+    Q = {-1, a - 1e-3, -1}; // Light
+    std::vector<Vertex> light = {Vertex(Q), Vertex(Q + 2*u), Vertex(Q + 2*w), Vertex(Q + 2*(u + w))};
+    Q = {-0.5*a, 0, -0.5*a};
+    // ground vertics
+    std::vector<Vertex> ground = {Vertex(Q), Vertex(Q + a*w), Vertex(Q + a*u), Vertex(Q + a*(u + w))};
+    // back-wall vertics
+    std::vector<Vertex> backWall = {Vertex(Q), Vertex(Q + a*u), Vertex(Q + a*v), Vertex(Q + a*(u + v))};
+    // left-wall vertics
+    std::vector<Vertex> leftWall = {Vertex(Q), Vertex(Q + a*v), Vertex(Q + a*w), Vertex(Q + a*(v + w))};
+    Q = {0.5*a, a, 0.5*a};
+    // right-wall vertics
+    std::vector<Vertex> rightWall = {Vertex(Q), Vertex(Q - a*w), Vertex(Q - a*v), Vertex(Q - a*(v + w))};
+    // floor vertics
+    std::vector<Vertex> floor = {Vertex(Q), Vertex(Q - a*u), Vertex(Q - a*w), Vertex(Q - a*(u + w))};
+    world.push_back(make_shared<Triangle>(&light, 0, 1, 2, light_material));
+    world.push_back(make_shared<Triangle>(&light, 1, 3, 2, light_material));
+    world.push_back(make_shared<Triangle>(&ground, 0, 1, 2, white_material));
+    world.push_back(make_shared<Triangle>(&ground, 1, 3, 2, white_material));
+    world.push_back(make_shared<Triangle>(&backWall, 0, 1, 2, white_material));
+    world.push_back(make_shared<Triangle>(&backWall, 1, 3, 2, white_material));
+    world.push_back(make_shared<Triangle>(&leftWall, 0, 1, 2, green_material));
+    world.push_back(make_shared<Triangle>(&leftWall, 1, 3, 2, green_material));
+    world.push_back(make_shared<Triangle>(&rightWall, 0, 1, 2, red_material));
+    world.push_back(make_shared<Triangle>(&rightWall, 1, 3, 2, red_material));
+    world.push_back(make_shared<Triangle>(&floor, 0, 1, 2, white_material));
+    world.push_back(make_shared<Triangle>(&floor, 1, 3, 2, white_material));
+    world.push_back(make_shared<Sphere>(vec3(0, 1, 0), 1, sphere_material));
 
-    double fov     = 30;
+    double fov     = 60;
     double near = -0.5, far = -50;
-    vec3 position  = vec3(0, 0, 3);
-    vec3 direction = ZERO_VEC3 - position;
+    vec3 position  = vec3(0, 0.5*a, 8);
+    vec3 direction = vec3(0, 0.5*a, 0) - position;
     vec3 up        = vec3(0, 1, 0);
 
     Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
 
-    cam.spp         = 10;
+    cam.spp         = 500;
     cam.maxDepth    = 10;
     cam.defocusAngle = 0;
 
@@ -276,7 +302,7 @@ void drawTriangle() {
 int main() {
 
     auto start_time = std::chrono::high_resolution_clock::now();
-    drawTriangle();
+    cornellBox();
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << "\nTime cost: " << duration.count() << " ms" << std::endl;
