@@ -235,12 +235,18 @@ void earth() {
     image.write_tga_file("result.tga");
 }
 
+class Test {
+public:
+    vector<int> list;
+    Test(vector<int> &l): list(l) {}
+};
+
 void cornellBox() {
     double aspectRatio = 1.0;
     int height = 600, width = (int)(height * aspectRatio);
     TGAImage image(width, height, TGAImage::RGB);
 
-    std::vector<shared_ptr<Intersectable>> world;
+    vector<shared_ptr<Intersectable>> world;
 
     auto red_material = make_shared<Lambertian>(vec3(0.65, 0.05, 0.05));
     auto white_material = make_shared<Lambertian>(vec3(0.73, 0.73, 0.73));
@@ -250,34 +256,51 @@ void cornellBox() {
 
     double a = 6;
     vec3 Q;
-    vec3 u = {1, 0, 0}, v = {0, 1, 0}, w = {0, 0, 1};
     Q = {-1, a - 1e-3, -1}; // Light
-    std::vector<Vertex> light = {Vertex(Q), Vertex(Q + 2*u), Vertex(Q + 2*w), Vertex(Q + 2*(u + w))};
+    vector<Vertex> light = {Vertex(Q), Vertex(Q + 2*XA), Vertex(Q + 2*ZA), Vertex(Q + 2*(XA + ZA))};
+    vector<int> lightVertInd = {0, 1, 2, 1, 3, 2};
     Q = {-0.5*a, 0, -0.5*a};
     // ground vertics
-    std::vector<Vertex> ground = {Vertex(Q), Vertex(Q + a*w), Vertex(Q + a*u), Vertex(Q + a*(u + w))};
+    vector<Vertex> ground = {Vertex(Q), Vertex(Q + a*ZA), Vertex(Q + a*XA), Vertex(Q + a*(XA + ZA))};
+    vector<int> groundVertInd = {0, 1, 2, 1, 3, 2};
     // back-wall vertics
-    std::vector<Vertex> backWall = {Vertex(Q), Vertex(Q + a*u), Vertex(Q + a*v), Vertex(Q + a*(u + v))};
+    vector<Vertex> backWall = {Vertex(Q), Vertex(Q + a*XA), Vertex(Q + a*YA), Vertex(Q + a*(XA + YA))};
+    vector<int> backWallVertInd = {0, 1, 2, 1, 3, 2};
     // left-wall vertics
-    std::vector<Vertex> leftWall = {Vertex(Q), Vertex(Q + a*v), Vertex(Q + a*w), Vertex(Q + a*(v + w))};
+    vector<Vertex> leftWall = {Vertex(Q), Vertex(Q + a*YA), Vertex(Q + a*ZA), Vertex(Q + a*(YA + ZA))};
+    vector<int> leftWallVertInd = {0, 1, 2, 1, 3, 2};
     Q = {0.5*a, a, 0.5*a};
     // right-wall vertics
-    std::vector<Vertex> rightWall = {Vertex(Q), Vertex(Q - a*w), Vertex(Q - a*v), Vertex(Q - a*(v + w))};
+    vector<Vertex> rightWall = {Vertex(Q), Vertex(Q - a*ZA), Vertex(Q - a*YA), Vertex(Q - a*(YA + ZA))};
+    vector<int> rightWallVertInd = {0, 1, 2, 1, 3, 2};
     // floor vertics
-    std::vector<Vertex> floor = {Vertex(Q), Vertex(Q - a*u), Vertex(Q - a*w), Vertex(Q - a*(u + w))};
-    world.push_back(make_shared<Triangle>(&light, 0, 1, 2, light_material));
-    world.push_back(make_shared<Triangle>(&light, 1, 3, 2, light_material));
-    world.push_back(make_shared<Triangle>(&ground, 0, 1, 2, white_material));
-    world.push_back(make_shared<Triangle>(&ground, 1, 3, 2, white_material));
-    world.push_back(make_shared<Triangle>(&backWall, 0, 1, 2, white_material));
-    world.push_back(make_shared<Triangle>(&backWall, 1, 3, 2, white_material));
-    world.push_back(make_shared<Triangle>(&leftWall, 0, 1, 2, green_material));
-    world.push_back(make_shared<Triangle>(&leftWall, 1, 3, 2, green_material));
-    world.push_back(make_shared<Triangle>(&rightWall, 0, 1, 2, red_material));
-    world.push_back(make_shared<Triangle>(&rightWall, 1, 3, 2, red_material));
-    world.push_back(make_shared<Triangle>(&floor, 0, 1, 2, white_material));
-    world.push_back(make_shared<Triangle>(&floor, 1, 3, 2, white_material));
-    world.push_back(make_shared<Sphere>(vec3(0, 1, 0), 1, sphere_material));
+    vector<Vertex> floor = {Vertex(Q), Vertex(Q - a*XA), Vertex(Q - a*ZA), Vertex(Q - a*(XA + ZA))};
+    vector<int> floorVertInd = {0, 1, 2, 1, 3, 2};
+    Mesh box1 = rectangle(1.8, 3.5);
+    box1.setMaterial(white_material);
+    Mesh box2 = rectangle(1.5, 1.5);
+    box2.setMaterial(white_material);
+
+    mat4 S = scale(1.0);
+    mat4 R = rotateY(20);
+    mat4 T = translate(vec3(-1, 0, -1));
+    mat4 SRT = T*R*S;
+    box1.transform(SRT);
+
+    R = rotateY(-30);
+    T = translate(vec3(1, 0, 1));
+    SRT = T*R*S;
+    box2.transform(SRT);
+
+    world.push_back(make_shared<Mesh>(light, lightVertInd, light_material));
+    world.push_back(make_shared<Mesh>(ground, groundVertInd, white_material));
+    world.push_back(make_shared<Mesh>(backWall, backWallVertInd, white_material));
+    world.push_back(make_shared<Mesh>(leftWall, leftWallVertInd, green_material));
+    world.push_back(make_shared<Mesh>(rightWall, rightWallVertInd, red_material));
+    world.push_back(make_shared<Mesh>(floor, floorVertInd, white_material));
+    world.push_back(make_shared<Mesh>(box1));
+    world.push_back(make_shared<Mesh>(box2));
+    // world.push_back(make_shared<Sphere>(vec3(0, 1, 0), 1, sphere_material));
 
     double fov     = 60;
     double near = -0.5, far = -50;
@@ -288,7 +311,7 @@ void cornellBox() {
     Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
 
     cam.spp         = 500;
-    cam.maxDepth    = 10;
+    cam.maxDepth    = 15;
     cam.defocusAngle = 0;
 
     std::sort(world.begin(), world.begin() + world.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});

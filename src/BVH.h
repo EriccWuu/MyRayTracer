@@ -5,10 +5,15 @@
 
 class BVHNode: public Intersectable {
 public:
+    BVHNode() {}
+
     BVHNode(const std::vector<shared_ptr<Intersectable>> &ordered_obj, size_t start, size_t end) {
         // [start, end)
         size_t n =  end - start;
-        if (n == 1) {
+        if (n <= 0) {
+            std::cerr << "BVH ERROR: Objects Number Error";
+        }
+        else if (n == 1) {
             left = right = ordered_obj[start];
             // std::cout << start << '\n';
         }
@@ -23,24 +28,28 @@ public:
             right = make_shared<BVHNode>(ordered_obj, mid, end);    // [mid, end)
         }
 
-        aabb = BoundingBox(left->boundingBox(), right->boundingBox());
+        if (left != nullptr && right != nullptr)
+            bbox = BoundingBox(left->boundingBox(), right->boundingBox());
     }
 
     bool intersect(const Ray &ray, Interval rayt, InterRecord & rec) const override {
-        if (!aabb.intersect(ray))
+        if (!bbox.intersect(ray))
             return false;
-        bool hit_left = left->intersect(ray, rayt, rec);
-        bool hit_right = right->intersect(ray, Interval(rayt.min, hit_left ? rec.t : rayt.max), rec);
+        bool hit_left = false, hit_right = false;
+        if (left != nullptr && right != nullptr) {
+            hit_left = left->intersect(ray, rayt, rec);
+            hit_right = right->intersect(ray, Interval(rayt.min, hit_left ? rec.t : rayt.max), rec);
+        }
 
         return hit_left || hit_right;
     }
 
-    BoundingBox boundingBox() const override { return aabb; }
+    BoundingBox boundingBox() const override { return bbox; }
 
 private:
-    shared_ptr<Intersectable> left;
-    shared_ptr<Intersectable> right;
-    BoundingBox aabb;
+    shared_ptr<Intersectable> left = nullptr;
+    shared_ptr<Intersectable> right = nullptr;
+    BoundingBox bbox;
 };
 
 

@@ -61,8 +61,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu"
-      binary: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu"
+      source: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs"
+      binary: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_EXE_LINKER_FLAGS: ""
@@ -70,15 +70,15 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu
+        Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs
         
-        Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_49468 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang.exe   -v -MD -MT CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_49468.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c
+        Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_217c7 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang.exe   -v -MD -MT CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_217c7.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c
         clang version 15.0.7
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: E:/Program/MSYS64/clang64/bin
          (in-process)
-         "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_49468.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -x c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c\x0d
+         "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_217c7.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -x c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c\x0d
         clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu\x0d
         ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"\x0d
         ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"\x0d
@@ -87,12 +87,12 @@ events:
          E:/Program/MSYS64/clang64/lib/clang/15.0.7/include\x0d
          E:/Program/MSYS64/clang64/include\x0d
         End of search list.\x0d
-        [2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang.exe  -v CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -o cmTC_49468.exe -Wl,--out-implib,libcmTC_49468.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        [2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang.exe  -v CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -o cmTC_217c7.exe -Wl,--out-implib,libcmTC_217c7.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         clang version 15.0.7
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: E:/Program/MSYS64/clang64/bin
-         "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_49468.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_49468.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d
+         "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_217c7.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_217c7.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d
         
       exitCode: 0
   -
@@ -122,15 +122,15 @@ events:
     message: |
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld\\.lld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu]
+        ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs]
         ignore line: []
-        ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_49468 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang.exe   -v -MD -MT CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_49468.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_217c7 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang.exe   -v -MD -MT CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_217c7.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c]
         ignore line: [clang version 15.0.7]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
         ignore line: [ (in-process)]
-        ignore line: [ "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_49468.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-whf9vu -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -x c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c\x0d]
+        ignore line: [ "E:/Program/MSYS64/clang64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_217c7.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-zc1rbs -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -x c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCCompilerABI.c\x0d]
         ignore line: [clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu\x0d]
         ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"\x0d]
         ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include"\x0d]
@@ -139,18 +139,18 @@ events:
         ignore line: [ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include\x0d]
         ignore line: [ E:/Program/MSYS64/clang64/include\x0d]
         ignore line: [End of search list.\x0d]
-        ignore line: [[2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang.exe  -v CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj -o cmTC_49468.exe -Wl --out-implib libcmTC_49468.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [[2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang.exe  -v CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj -o cmTC_217c7.exe -Wl --out-implib libcmTC_217c7.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [clang version 15.0.7]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
-        link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_49468.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_49468.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d]
+        link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_217c7.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_217c7.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d]
           arg [E:/Program/MSYS64/clang64/bin/ld.lld] ==> ignore
           arg [-m] ==> ignore
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_49468.exe] ==> ignore
+          arg [cmTC_217c7.exe] ==> ignore
           arg [E:/Program/MSYS64/clang64/lib/crt2.o] ==> obj [E:/Program/MSYS64/clang64/lib/crt2.o]
           arg [E:/Program/MSYS64/clang64/lib/crtbegin.o] ==> obj [E:/Program/MSYS64/clang64/lib/crtbegin.o]
           arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib]
@@ -158,9 +158,9 @@ events:
           arg [-LE:/Program/MSYS64/clang64/lib] ==> dir [E:/Program/MSYS64/clang64/lib]
           arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib]
           arg [-LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows] ==> dir [E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows]
-          arg [CMakeFiles/cmTC_49468.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [CMakeFiles/cmTC_217c7.dir/CMakeCCompilerABI.c.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_49468.dll.a] ==> ignore
+          arg [libcmTC_217c7.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -207,8 +207,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge"
-      binary: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge"
+      source: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn"
+      binary: "E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_EXE_LINKER_FLAGS: ""
@@ -216,15 +216,15 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge
+        Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn
         
-        Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_ff920 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -v -MD -MT CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_ff920.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_95013 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -v -MD -MT CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_95013.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp
         clang version 15.0.7
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: E:/Program/MSYS64/clang64/bin
          (in-process)
-         "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_ff920.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -x c++ E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp
+         "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_95013.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -x c++ E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp
         clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu
         ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1"
         ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"
@@ -235,12 +235,12 @@ events:
          E:/Program/MSYS64/clang64/lib/clang/15.0.7/include\x0d
          E:/Program/MSYS64/clang64/include\x0d
         End of search list.\x0d
-        [2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe  -v CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_ff920.exe -Wl,--out-implib,libcmTC_ff920.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        [2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe  -v CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_95013.exe -Wl,--out-implib,libcmTC_95013.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         clang version 15.0.7
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: E:/Program/MSYS64/clang64/bin
-         "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_ff920.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_ff920.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d
+         "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_95013.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_95013.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d
         
       exitCode: 0
   -
@@ -272,15 +272,15 @@ events:
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld\\.lld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge]
+        ignore line: [Change Dir: E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn]
         ignore line: []
-        ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_ff920 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -v -MD -MT CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_ff920.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s):E:/Program/MSYS64/clang64/bin/ninja.exe -v cmTC_95013 && [1/2] E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe   -v -MD -MT CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_95013.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -c E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [clang version 15.0.7]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
         ignore line: [ (in-process)]
-        ignore line: [ "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_ff920.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-3inmge -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -x c++ E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [ "E:/Program/MSYS64/clang64/bin/clang++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn -resource-dir E:/Program/MSYS64/clang64/lib/clang/15.0.7 -dependency-file "CMakeFiles\\\\cmTC_95013.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/include/c++/v1 -internal-isystem E:/Program/MSYS64/clang64/lib/clang/15.0.7/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem E:/Program/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem E:/Program/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=E:/Doc/ProjectFiles/CPP/MyRayTracer/build/CMakeFiles/CMakeScratch/TryCompile-7jktjn -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -x c++ E:/Program/CMake/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [clang -cc1 version 15.0.7 based upon LLVM 15.0.7 default target x86_64-w64-windows-gnu]
         ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1"]
         ignore line: [ignoring nonexistent directory "E:/Program/MSYS64/clang64/x86_64-w64-mingw32/include"]
@@ -291,18 +291,18 @@ events:
         ignore line: [ E:/Program/MSYS64/clang64/lib/clang/15.0.7/include\x0d]
         ignore line: [ E:/Program/MSYS64/clang64/include\x0d]
         ignore line: [End of search list.\x0d]
-        ignore line: [[2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe  -v CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_ff920.exe -Wl --out-implib libcmTC_ff920.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [[2/2] cmd.exe /C "cd . && E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe  -v CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_95013.exe -Wl --out-implib libcmTC_95013.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [clang version 15.0.7]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: E:/Program/MSYS64/clang64/bin]
-        link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_ff920.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_ff920.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d]
+        link line: [ "E:/Program/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_95013.exe E:/Program/MSYS64/clang64/lib/crt2.o E:/Program/MSYS64/clang64/lib/crtbegin.o -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LE:/Program/MSYS64/clang64/lib -LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib -LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_95013.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 E:/Program/MSYS64/clang64/lib/crtend.o\x0d]
           arg [E:/Program/MSYS64/clang64/bin/ld.lld] ==> ignore
           arg [-m] ==> ignore
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_ff920.exe] ==> ignore
+          arg [cmTC_95013.exe] ==> ignore
           arg [E:/Program/MSYS64/clang64/lib/crt2.o] ==> obj [E:/Program/MSYS64/clang64/lib/crt2.o]
           arg [E:/Program/MSYS64/clang64/lib/crtbegin.o] ==> obj [E:/Program/MSYS64/clang64/lib/crtbegin.o]
           arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/lib]
@@ -310,9 +310,9 @@ events:
           arg [-LE:/Program/MSYS64/clang64/lib] ==> dir [E:/Program/MSYS64/clang64/lib]
           arg [-LE:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib] ==> dir [E:/Program/MSYS64/clang64/x86_64-w64-mingw32/sys-root/mingw/lib]
           arg [-LE:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows] ==> dir [E:/Program/MSYS64/clang64/lib/clang/15.0.7/lib/windows]
-          arg [CMakeFiles/cmTC_ff920.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_95013.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_ff920.dll.a] ==> ignore
+          arg [libcmTC_95013.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore

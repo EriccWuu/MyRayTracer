@@ -14,9 +14,11 @@ struct Ray {
 public:
     vec3 orig;  // Origin of the ray
     vec3 dir;   // Direction of the ray
+    double time;
 
     Ray() {}
-    Ray(const vec3& origin, const vec3& direction) : orig(origin), dir(direction) {}
+    Ray(const vec3& origin, const vec3& direction) : orig(origin), dir(direction), time(0) {}
+    Ray(const vec3& origin, const vec3& direction, double time) : orig(origin), dir(direction), time(time) {}
 
     vec3 origin() const  { return orig; }
     vec3 direction() const { return dir; }

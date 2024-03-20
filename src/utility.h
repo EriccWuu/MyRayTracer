@@ -1,11 +1,14 @@
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef __UTILITY_H__
+#define __UTILITY_H__
 
 #include "stdio.h"
 #include "string"
 #include <memory>
 #include <vector>
 #include "Intersectable.h"
+#include "Sphere.h"
+#include "Triangle.h"
+#include "Mesh.h"
 #include "BVH.h"
 #include "Ray.h"
 #include "Material.h"
