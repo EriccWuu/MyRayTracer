@@ -87,7 +87,7 @@ void Camera::render(const BVHNode &objects, TGAImage &image) {
     ProgressBar bar(10);
     vec3 color;
 
-#pragma omp parallel for schedule(dynamic, 1) private(color)       // OpenMP
+#pragma omp parallel for schedule(dynamic, 1) private(color)      // OpenMP
     for (int j = 0; j < screen_h; j ++) {
         std::string message = "Renderering (" + std::to_string(spp) + " spp)";
         bar.update(static_cast<double>(j)/(screen_h-1), message);
@@ -149,7 +149,7 @@ vec3 Camera::radiance(const Ray &r, int depth, const BVHNode &objects) {
     Interval rayt(1e-3, INF);
 
     if (!objects.intersect(r, rayt, rec))
-        return ZERO_VEC3;
+        return backgroundLight;
 
     Ray scattered;
     vec3 attenuation;

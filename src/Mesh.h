@@ -48,7 +48,7 @@ public:
         return bvh.boundingBox();
     }
 
-    // Compute wheather a ray hitted the Triangle
+    // Compute wheather a ray hitted the Mesh
     bool intersect(const Ray &ray, Interval rayt, InterRecord &rec) const override {
         if (!bvh.intersect(ray, rayt, rec)) return false;
         return true;

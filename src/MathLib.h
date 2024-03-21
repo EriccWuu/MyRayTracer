@@ -709,12 +709,18 @@ inline vec3 reflect(const vec3& v, const vec3& n) {
     return (v - 2*(v*n)*n).normalize();
 }
 
-// Compute Refract Ray
 inline vec3 refract(const vec3& rin, const vec3& n, double etai_over_etat) {
-    double cos_theta1 = rin * n;
+    double cos_theta1 = -rin * n;
     double cos2_theta2 = 1 - etai_over_etat*etai_over_etat*(1 - cos_theta1*cos_theta1);
-    if (cos2_theta2 < 0) return reflect(rin, n);    // Total reflection
-    vec3 rout_perp =  etai_over_etat * (rin - cos_theta1*n);
+    // Use Schlick's approximation for reflectance.
+    double r0 = (1 - etai_over_etat) / (1 + etai_over_etat);
+    r0 = r0 * r0;
+    double rate = r0 + (1 - r0)*pow(1 - cos_theta1, 5);
+    if (cos2_theta2 < 0 || rate > randDouble()) {
+        // std::cout << "Total reflection" << std::endl;
+        return reflect(rin, n);    // Total reflection
+    }
+    vec3 rout_perp =  etai_over_etat * (rin + cos_theta1*n);
     vec3 rout_para = -n * sqrt(cos2_theta2);
     return (rout_perp + rout_para).normalize();
 }

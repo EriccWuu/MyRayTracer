@@ -46,7 +46,7 @@ private:
 
 class Metal: public Material {
 public:
-    Metal(const vec3 &a, double f): albedo(a), fuzzy(clamp(f)) {}
+    Metal(const vec3 &a, double f=0.0): albedo(a), fuzzy(clamp(f)) {}
     bool scatter(const Ray &rayin, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         vec3 n = rec.inward ? rec.normal : -rec.normal;
         vec3 reflectdir = reflect(rayin.dir, n) + fuzzy*randVecSemisphere(n); // reflect direction
@@ -100,9 +100,9 @@ public:
     Isotropic(const vec3 &a): albedo(std::make_shared<SolidColor>(a)) {}
     Isotropic(shared_ptr<Texture> a): albedo(a) {}
     bool scatter(const Ray &rayIn, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
-        scattered = Ray(rec.p, randVecSemisphere(YA), rayIn.time);
+        scattered = Ray(rec.p, randVecSphere(), rayIn.time);
         attenuation = albedo->value(rec.uv.x, rec.uv.y, rec.p);
-        return false;
+        return true;
     }
 
 private:

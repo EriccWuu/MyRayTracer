@@ -77,7 +77,8 @@ public:
     // Compute wheather a ray hitted the Triangle
     bool intersect(const Ray &ray, Interval rayt, InterRecord &rec) const override {
         double k = n*ray.dir;
-        if (fabs(k) < EPS) return false;
+        // if (k > -EPS) return false;    // No intersection if triangle is back-face
+        if (fabs(k) < EPS) return false;    // No intersection if triangle is back-face
         double t = (D - ray.orig*n) / k;
         if (!rayt.contain(t)) return false;
         vec3 intersection = ray.at(t);
@@ -91,7 +92,7 @@ public:
         rec.t = t;
         rec.p = intersection;
         rec.uv = vec2(alpha, beta);
-        rec.inward = (n*ray.dir < 0);
+        rec.inward = (k < 0);
         rec.normal = rec.inward ? normal : -normal; 
         rec.mat = mat;
 

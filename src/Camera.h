@@ -17,6 +17,7 @@ public:
     double defocusAngle = 0;
     int screen_w, screen_h;
     int spp = 100, maxDepth = 5;
+    vec3 backgroundLight = ZERO_VEC3;
 
     TGAImage frame;
     TGAImage zbuffer;

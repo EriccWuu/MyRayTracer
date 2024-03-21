@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "Triangle.h"
 #include "Mesh.h"
+#include "Volume.h"
 #include "BVH.h"
 #include "Ray.h"
 #include "Material.h"
