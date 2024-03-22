@@ -65,6 +65,7 @@ void test() {
     cam.maxDepth    = 15;
     cam.defocusAngle = 0;
     cam.near    = -0.5;
+    cam.backgroundLight = ONE_VEC3 * 0.9;
 
     std::sort(world.begin(), world.begin() + world.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
 
@@ -279,9 +280,10 @@ void cornellBox() {
     Camera cam(position, direction, up, height, aspectRatio, fov, near, far);
 
     cam.spp         = 500;
-    cam.maxDepth    = 15;
+    cam.maxDepth    = 10;
     cam.defocusAngle = 0;
     cam.backgroundLight = ZERO_VEC3;
+    cam.SSAA = 2;
 
     std::sort(world.begin(), world.begin() + world.size(), [&](const shared_ptr<Intersectable> &a, const shared_ptr<Intersectable> &b) {return compare(a, b);});
 

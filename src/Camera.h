@@ -17,6 +17,7 @@ public:
     double defocusAngle = 0;
     int screen_w, screen_h;
     int spp = 100, maxDepth = 5;
+    int SSAA = 1;
     vec3 backgroundLight = ZERO_VEC3;
 
     TGAImage frame;
@@ -39,7 +40,7 @@ private:
 
     inline double width();
     inline double height();
-    Ray  getRay(const int &i, const int &j);
+    Ray  getRay(const int i, const int j, const int sx, const int sy);
     vec3 radiance(const Ray &r, int depth, const BVHNode &obj);
     inline vec2 pixSampleSquare();
     inline vec2 pixSampleDisk(double radius = 1.0);

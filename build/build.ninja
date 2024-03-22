@@ -51,19 +51,19 @@ build cmake_object_order_depends_target_MyRayTracer: phony || CMakeFiles/MyRayTr
 
 build CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj: CXX_COMPILER__MyRayTracer_unscanned_Debug E$:/Doc/ProjectFiles/CPP/MyRayTracer/src/Camera.cpp || cmake_object_order_depends_target_MyRayTracer
   DEP_FILE = CMakeFiles\MyRayTracer.dir\src\Camera.cpp.obj.d
-  FLAGS = -O3 -g -std=gnu++20
+  FLAGS = -O3 -fopenmp -g -std=gnu++20
   OBJECT_DIR = CMakeFiles\MyRayTracer.dir
   OBJECT_FILE_DIR = CMakeFiles\MyRayTracer.dir\src
 
 build CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj: CXX_COMPILER__MyRayTracer_unscanned_Debug E$:/Doc/ProjectFiles/CPP/MyRayTracer/src/TGAImage.cpp || cmake_object_order_depends_target_MyRayTracer
   DEP_FILE = CMakeFiles\MyRayTracer.dir\src\TGAImage.cpp.obj.d
-  FLAGS = -O3 -g -std=gnu++20
+  FLAGS = -O3 -fopenmp -g -std=gnu++20
   OBJECT_DIR = CMakeFiles\MyRayTracer.dir
   OBJECT_FILE_DIR = CMakeFiles\MyRayTracer.dir\src
 
 build CMakeFiles/MyRayTracer.dir/src/main.cpp.obj: CXX_COMPILER__MyRayTracer_unscanned_Debug E$:/Doc/ProjectFiles/CPP/MyRayTracer/src/main.cpp || cmake_object_order_depends_target_MyRayTracer
   DEP_FILE = CMakeFiles\MyRayTracer.dir\src\main.cpp.obj.d
-  FLAGS = -O3 -g -std=gnu++20
+  FLAGS = -O3 -fopenmp -g -std=gnu++20
   OBJECT_DIR = CMakeFiles\MyRayTracer.dir
   OBJECT_FILE_DIR = CMakeFiles\MyRayTracer.dir\src
 
@@ -76,7 +76,7 @@ build CMakeFiles/MyRayTracer.dir/src/main.cpp.obj: CXX_COMPILER__MyRayTracer_uns
 # Link the executable MyRayTracer.exe
 
 build MyRayTracer.exe: CXX_EXECUTABLE_LINKER__MyRayTracer_Debug CMakeFiles/MyRayTracer.dir/src/Camera.cpp.obj CMakeFiles/MyRayTracer.dir/src/TGAImage.cpp.obj CMakeFiles/MyRayTracer.dir/src/main.cpp.obj
-  FLAGS = -O3 -g
+  FLAGS = -O3 -fopenmp -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MyRayTracer.dir
   POST_BUILD = cd .

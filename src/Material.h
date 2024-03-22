@@ -67,8 +67,7 @@ public:
     bool scatter(const Ray &rayin, const InterRecord &rec, Ray &scattered, vec3 &attenuation) const override {
         double refractRatio = rec.inward ? ir : 1/ir;
         vec3 n = rec.inward ? rec.normal : -rec.normal;
-        vec3 dir;
-        dir = refract(rayin.dir, n, refractRatio); // Refract
+        vec3 dir = refract(rayin.dir, n, refractRatio); // Refract
         scattered = Ray(rec.p, dir);
         attenuation = albedo;
         return true;

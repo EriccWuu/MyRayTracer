@@ -78,7 +78,7 @@ public:
     bool intersect(const Ray &ray, Interval rayt, InterRecord &rec) const override {
         double k = n*ray.dir;
         // if (k > -EPS) return false;    // No intersection if triangle is back-face
-        if (fabs(k) < EPS) return false;    // No intersection if triangle is back-face
+        if (fabs(k) < EPS) return false;
         double t = (D - ray.orig*n) / k;
         if (!rayt.contain(t)) return false;
         vec3 intersection = ray.at(t);
@@ -87,13 +87,15 @@ public:
         auto beta = w*u.cross(p);
         if (alpha < 0 || beta < 0 || (1 - alpha - beta) < 0) return false;
 
+        // std::cout << t << '\n';
+
         // Update rec
         vec3 normal = n.normalize();
         rec.t = t;
         rec.p = intersection;
         rec.uv = vec2(alpha, beta);
         rec.inward = (k < 0);
-        rec.normal = rec.inward ? normal : -normal; 
+        rec.normal = normal; 
         rec.mat = mat;
 
         return true;

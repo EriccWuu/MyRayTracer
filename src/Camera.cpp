@@ -80,25 +80,58 @@ void Camera::init() {
     double defcusRadius = -near*tan(deg2rad(defocusAngle / 2));
     defocusDiskU = right.xyz() * defcusRadius;
     defocusDiskV = -up.xyz() * defcusRadius;
+    spp = (spp > 0) ? spp : 100;
+    SSAA = (SSAA > 0) ? SSAA : 1;
 }
+
+// void Camera::render(const BVHNode &objects, TGAImage &image) {
+//     init();
+//     ProgressBar bar(10);
+//     vec3 color;
+//     double inv_spp = 1.0 / spp;
+
+// #pragma omp parallel for schedule(dynamic, 1) private(color)      // OpenMP
+//     for (int j = 0; j < screen_h; j ++) {
+//         std::string message = "Renderering (" + std::to_string(spp) + " spp)";
+//         bar.update(static_cast<double>(j)/(screen_h-1), message);
+//         for (int i = 0; i < screen_w; i ++) {
+//             color = ZERO_VEC3;
+//             for (int k = 0; k < spp; k ++) {
+//                 Ray ray = getRay(i, j, 0, 0);
+//                 color += radiance(ray, 0, objects) * inv_spp;
+//             }
+//             color = clampVec3(color); // Clamp to [0, 1]
+//             gammaCorrection(color); // Gamma correction
+//             image.set(i, j, TGAColor(255*color));
+//         }
+//     }
+// }
 
 void Camera::render(const BVHNode &objects, TGAImage &image) {
     init();
     ProgressBar bar(10);
-    vec3 color;
+    vec3 rad, color;
+    double inv_spp = 1.0 / spp, inv_ssaa2 = 1.0 / (SSAA * SSAA);
+    int SPP = spp*SSAA*SSAA;
 
-#pragma omp parallel for schedule(dynamic, 1) private(color)      // OpenMP
+#pragma omp parallel for schedule(dynamic, 1) private(rad, color)      // OpenMP
     for (int j = 0; j < screen_h; j ++) {
-        std::string message = "Renderering (" + std::to_string(spp) + " spp)";
+        std::string message = "Renderering (" + std::to_string(SPP) + " spp)";
         bar.update(static_cast<double>(j)/(screen_h-1), message);
-        std::vector<vec3> line;
         for (int i = 0; i < screen_w; i ++) {
             color = ZERO_VEC3;
-            for (int k = 0; k < spp; k ++) {
-                Ray ray = getRay(i, j);
-                color += radiance(ray, 0, objects);
+            // SSAA loop
+            for (int sy = 0; sy < SSAA; sy ++) {
+                for (int sx = 0; sx < SSAA; sx ++) {
+                    rad = ZERO_VEC3;
+                    // Ray sample loop
+                    for (int k = 0; k < spp; k ++) {
+                        Ray ray = getRay(i, j, sx, sy);
+                        rad += radiance(ray, 0, objects) * inv_spp;
+                    }
+                    color += clampVec3(rad) * inv_ssaa2; // Clamp to [0, 1]
+                }
             }
-            color = clampVec3(color / spp); // Clamp to [0, 1]
             gammaCorrection(color); // Gamma correction
             image.set(i, j, TGAColor(255*color));
         }
@@ -131,10 +164,16 @@ inline vec2 Camera::pixSampleDisk(double radius) {
     return sample;
 }
 
-Ray Camera::getRay(const int &i, const int &j) {
-    vec2 pixSamp = pixSampleSquare();
-    vec3 pixPos = viewportO + (i - (screen_w >> 1) + 0.5)*viewportU + (j - (screen_h >> 1) + 0.5)*viewportV;
-    pixPos += viewportU*pixSamp.x + viewportV*pixSamp.y;
+Ray Camera::getRay(const int i, const int j, const int sx, const int sy) {
+    double delta = 1.0 / (2*SSAA);
+    vec2 pixSamp = delta*pixSampleSquare();
+    // vec3 pixPos = viewportO
+    //             + (i - (screen_w>>1) + pixSamp.x + 0.5)*viewportU
+    //             + (j - (screen_h>>1) + pixSamp.y + 0.5)*viewportV;
+    vec3 pixPos = viewportO
+                + (i - (screen_w>>1) + (sx+1)*delta + pixSamp.x)*viewportU
+                + (j - (screen_h>>1) + (sy+1)*delta + pixSamp.y)*viewportV;
+
     vec3 rayOrig = viewO;
     if (defocusAngle > 0) {
         vec2 defcusSamp = pixSampleDisk();
